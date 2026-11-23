@@ -171,6 +171,16 @@
     .benefit h3 { margin: 0 0 6px; color: var(--navy); font-size: 15px; }
     .benefit p { margin: 0; color: var(--muted); font-size: 12.5px; line-height: 1.75; }
 
+    /* الأسئلة الشائعة */
+    .faq-list { max-width: 860px; margin-inline: auto; display: grid; gap: 12px; }
+    .faq-item { border: 1px solid var(--line); border-radius: 16px; background: white; transition: border-color .2s, box-shadow .2s; overflow: hidden; }
+    .faq-item[open] { border-color: #b7ebdc; box-shadow: 0 12px 30px rgba(19, 34, 88, .06); }
+    .faq-q { list-style: none; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 18px 22px; color: var(--navy); font-size: 14.5px; font-weight: 700; cursor: pointer; user-select: none; }
+    .faq-q::-webkit-details-marker { display: none; }
+    .faq-q::after { content: "+"; flex: 0 0 28px; display: grid; place-items: center; width: 28px; height: 28px; border-radius: 8px; background: #eef2fb; color: var(--navy); font-size: 17px; font-weight: 700; transition: transform .2s, background .2s; }
+    .faq-item[open] .faq-q::after { content: "−"; background: #e8fbf5; color: #079c7c; }
+    .faq-a { padding: 0 22px 18px; color: var(--muted); font-size: 13px; line-height: 1.95; border-top: 1px solid #f1f4fa; padding-top: 13px; }
+
     .cta { padding-block: 76px; background: linear-gradient(115deg, #0d1455, #171e71); color: white; }
     .cta-box { display: flex; align-items: center; justify-content: space-between; gap: 30px; }
     .cta h2 { margin: 0 0 8px; color: white; font-size: 30px; }
@@ -247,6 +257,7 @@
         <a href="#المزايا">المزايا</a>
         <a href="#من-داخل-إكزامكس">من داخل التطبيق</a>
         <a href="#الخطوات">آلية التوزيع</a>
+        <a href="#الأسئلة-الشائعة">الأسئلة الشائعة</a>
         <a href="#الدعم">الدعم</a>
         <a href="https://drive.google.com/file/d/1HYcGllLmbrB_qonxqwquVGE6NuvyK__v/view?usp=sharing" target="_blank" rel="noopener noreferrer">تنزيل تطبيق ويندوز</a>
       </div>
@@ -537,6 +548,42 @@
       </div>
     </section>
 
+    <section class="section" id="الأسئلة-الشائعة">
+      <div class="container">
+        <div class="section-heading">
+          <span class="kicker">إجابات سريعة</span>
+          <h2>الأسئلة الشائعة</h2>
+          <p>أكثر الاستفسارات شيوعاً حول التشغيل، التصحيح الآلي، نظام نور، والمزامنة.</p>
+        </div>
+        <div class="faq-list">
+          <details class="faq-item" open>
+            <summary class="faq-q">هل يحتاج التصحيح الآلي جهاز OMR خاصاً أم تكفي الطابعة والماسح العادي؟</summary>
+            <div class="faq-a">لا يحتاج أي أجهزة OMR باهظة الثمن؛ يمكنك طباعة نماذج الإجابة على أي طابعة مكتبية عادية، ثم مسح الأوراق بأي ماسح ضوئي (Scanner) أو استيرادها كملف PDF متعدد الصفحات أو صور مباشرة داخل إكزامكس.</div>
+          </details>
+          <details class="faq-item">
+            <summary class="faq-q">هل يعمل البرنامج بدون اتصال بالإنترنت؟</summary>
+            <div class="faq-a">نعم، يعمل البرنامج محلياً بالكامل لإدارة الطلاب، توزيع اللجان، طباعة الكشوف ونماذج OMR، والتصحيح الآلي وإصدار التقارير بسرعة عالية دون اشتراط اتصال دائم. يلزم الإنترنت فقط عند التفعيل الأول أو عند استخدام المزامنة السحابية بين الأجهزة.</div>
+          </details>
+          <details class="faq-item">
+            <summary class="faq-q">كيف أستورد بيانات الطلاب من نظام نور وكيف أنقل الدرجات إليه؟</summary>
+            <div class="faq-a">من نظام نور اختر «تقارير ← الطلاب ← كشف الطلاب» وصدّره بصيغة Excel ثم استورده مباشرة في المرحلة الدراسية داخل إكزامكس. وبعد انتهاء التصحيح يمكنك تصدير الدرجات إلى Excel أو PDF أو نسخها ولصقها مباشرة في نظام نور عبر إضافة إكزامكس.</div>
+          </details>
+          <details class="faq-item">
+            <summary class="faq-q">ماذا يحدث عند التظليل المزدوج أو ترك سؤال فارغ أو غياب الطالب؟</summary>
+            <div class="faq-a">يكتشف النظام التظليل المزدوج (في الاختيار من متعدد أو الصح والخطأ أو المزاوجة) وكذلك الأسئلة الفارغة ويعرضها في شاشة مراجعة واضحة لتعديلها بنقرة واحدة. كما يقارن عدد الأوراق المصححة بعدد طلاب الصف/الشعبة لعرض تنبيه بالغائبين، ويرصدهم تلقائياً في كشف الدرجات بـ «غائب (٠)».</div>
+          </details>
+          <details class="faq-item">
+            <summary class="faq-q">هل يمكن تحديد شعبة معينة عند إنشاء الاختبار أو تعديله بعد الحفظ؟</summary>
+            <div class="faq-a">نعم؛ عند إنشاء الاختبار يتم اختيار جميع شعب الصف افتراضياً، مع إمكانية تحديد شعبة معينة أو أكثر بحيث تقتصر الطباعة ومقارنة الغياب والكشوف على طلابها فقط. كما يمكنك تعديل بيانات الاختبار وتوزيع أسئلته بالكامل طالما لم يبدأ تصحيح أوراق الطلاب بعد.</div>
+          </details>
+          <details class="faq-item">
+            <summary class="faq-q">هل يمكن التعاون على أكثر من جهاز في نفس المدرسة؟</summary>
+            <div class="faq-a">نعم، يوفّر إكزامكس ميزة المزامنة السحابية الذكية للتعاون بين أعضاء لجنة الاختبارات (جهاز للتوزيع والطباعة وآخر للتصحيح) مع كشف التعارضات، بالإضافة إلى إمكانية تصدير واستيراد أرشيف <code>.examix</code> الكامل الذي يحفظ قاعدة البيانات وصور أوراق الإجابة معاً.</div>
+          </details>
+        </div>
+      </div>
+    </section>
+
     <section class="cta" id="الدعم">
       <div class="container cta-box">
         <div>
@@ -556,7 +603,7 @@
       <a class="footer-brand" href="#الرئيسية"><img src="icons/app_icon.png" alt=""> إكزامكس Examix</a>
       <span>منصة متكاملة لإدارة الاختبارات المدرسية</span>
       <span>تطوير: عبدالرزاق المعلوي · رقم وثيقة العمل الحر: FL-175369540</span>
-      <div class="footer-links"><a href="#المزايا">المزايا</a><a href="https://wa.me/966542158808" target="_blank" rel="noopener noreferrer">الدعم الفني</a></div>
+      <div class="footer-links"><a href="#المزايا">المزايا</a><a href="#الأسئلة-الشائعة">الأسئلة الشائعة</a><a href="https://wa.me/966542158808" target="_blank" rel="noopener noreferrer">الدعم الفني</a></div>
     </div>
   </footer>
 

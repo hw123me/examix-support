@@ -1,722 +1,2606 @@
 <!doctype html>
 <html lang="ar" dir="rtl">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#10165d">
-  <meta name="description" content="إكزامكس Examix — منصة متكاملة لإدارة الاختبارات، توزيع الطلاب واللجان، طباعة وتصحيح أوراق OMR، حصر الغياب، والمزامنة السحابية.">
-  <title>إكزامكس Examix | اختباراتك… بذكاء</title>
-  <link rel="icon" href="icons/favicon.ico">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      color-scheme: light;
-      --navy: #10165d;
-      --navy-deep: #090e48;
-      --blue: #20c9e8;
-      --green: #08c995;
-      --ink: #172044;
-      --muted: #5d6785;
-      --line: #e6eaf2;
-      --paper: #fff;
-      --soft: #f6f8fc;
-      --shadow: 0 22px 65px rgba(20, 29, 86, .12);
-      font-family: "Alexandria", Tahoma, sans-serif;
-      scroll-behavior: smooth;
-    }
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#10165d" />
+    <meta
+      name="description"
+      content="إكزامكس Examix — منصة متكاملة لإدارة الاختبارات، توزيع الطلاب واللجان، طباعة وتصحيح أوراق OMR، حصر الغياب، والمزامنة السحابية."
+    />
+    <title>إكزامكس Examix | اختباراتك… بذكاء</title>
+    <link rel="icon" href="icons/favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Alexandria:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        color-scheme: light;
+        --navy: #10165d;
+        --navy-deep: #090e48;
+        --blue: #20c9e8;
+        --green: #08c995;
+        --ink: #172044;
+        --muted: #5d6785;
+        --line: #e6eaf2;
+        --paper: #fff;
+        --soft: #f6f8fc;
+        --shadow: 0 22px 65px rgba(20, 29, 86, 0.12);
+        font-family: "Alexandria", Tahoma, sans-serif;
+        scroll-behavior: smooth;
+      }
 
-    * { box-sizing: border-box; }
-    body { margin: 0; color: var(--ink); background: var(--paper); line-height: 1.8; }
-    a { color: inherit; text-decoration: none; }
-    button { font: inherit; }
-    .container { width: min(1180px, calc(100% - 48px)); margin-inline: auto; }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        color: var(--ink);
+        background: var(--paper);
+        line-height: 1.8;
+      }
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+      button {
+        font: inherit;
+      }
+      .container {
+        width: min(1180px, calc(100% - 48px));
+        margin-inline: auto;
+      }
 
-    .topbar { background: var(--navy-deep); color: #d7ddff; font-size: 12px; }
-    .topbar-inner { display: flex; justify-content: space-between; align-items: center; min-height: 40px; gap: 16px; }
-    .topbar a { color: #5de4c2; font-weight: 600; }
+      .topbar {
+        background: var(--navy-deep);
+        color: #d7ddff;
+        font-size: 12px;
+      }
+      .topbar-inner {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        min-height: 40px;
+        gap: 16px;
+      }
+      .topbar a {
+        color: #5de4c2;
+        font-weight: 600;
+      }
 
-    header { position: sticky; inset-block-start: 0; z-index: 20; background: rgba(255,255,255,.95); backdrop-filter: blur(14px); border-bottom: 1px solid rgba(232,235,243,.85); }
-    .nav { min-height: 76px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
-    .brand { display: inline-flex; align-items: center; gap: 11px; color: var(--navy); font-size: 20px; font-weight: 800; letter-spacing: -.5px; }
-    .brand img { width: 43px; height: 43px; object-fit: cover; border-radius: 12px; }
-    .brand small { display: block; color: #8188a2; font-size: 9px; font-weight: 500; line-height: 1.2; letter-spacing: 1.8px; }
-    .nav-links { display: flex; align-items: center; gap: 26px; color: #4a5574; font-size: 13px; font-weight: 600; }
-    .nav-links a:hover { color: #0c9f8c; }
-    .button { display: inline-flex; justify-content: center; align-items: center; gap: 9px; min-height: 47px; padding: 0 21px; border: 0; border-radius: 13px; color: white; font-size: 13px; font-weight: 700; background: linear-gradient(115deg, var(--green), #12b9bb); box-shadow: 0 10px 24px rgba(8,201,149,.22); transition: transform .2s, box-shadow .2s; cursor: pointer; }
-    .button:hover { transform: translateY(-2px); box-shadow: 0 14px 28px rgba(8,201,149,.3); }
-    .button svg { width: 17px; height: 17px; }
-    .menu-toggle { display: none; background: transparent; border: 0; color: var(--navy); padding: 8px; cursor: pointer; }
+      header {
+        position: sticky;
+        inset-block-start: 0;
+        z-index: 20;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(14px);
+        border-bottom: 1px solid rgba(232, 235, 243, 0.85);
+      }
+      .nav {
+        min-height: 76px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+      }
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 11px;
+        color: var(--navy);
+        font-size: 20px;
+        font-weight: 800;
+        letter-spacing: -0.5px;
+      }
+      .brand img {
+        width: 43px;
+        height: 43px;
+        object-fit: cover;
+        border-radius: 12px;
+      }
+      .brand small {
+        display: block;
+        color: #8188a2;
+        font-size: 9px;
+        font-weight: 500;
+        line-height: 1.2;
+        letter-spacing: 1.8px;
+      }
+      .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 26px;
+        color: #4a5574;
+        font-size: 13px;
+        font-weight: 600;
+      }
+      .nav-links a:hover {
+        color: #0c9f8c;
+      }
+      .button {
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        gap: 9px;
+        min-height: 47px;
+        padding: 0 21px;
+        border: 0;
+        border-radius: 13px;
+        color: white;
+        font-size: 13px;
+        font-weight: 700;
+        background: linear-gradient(115deg, var(--green), #12b9bb);
+        box-shadow: 0 10px 24px rgba(8, 201, 149, 0.22);
+        transition:
+          transform 0.2s,
+          box-shadow 0.2s;
+        cursor: pointer;
+      }
+      .button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 14px 28px rgba(8, 201, 149, 0.3);
+      }
+      .button svg {
+        width: 17px;
+        height: 17px;
+      }
+      .menu-toggle {
+        display: none;
+        background: transparent;
+        border: 0;
+        color: var(--navy);
+        padding: 8px;
+        cursor: pointer;
+      }
 
-    .hero { position: relative; overflow: hidden; color: white; background: radial-gradient(ellipse at 82% 18%, rgba(35,201,232,.16), transparent 36%), radial-gradient(ellipse at 6% 88%, rgba(8,201,149,.14), transparent 35%), linear-gradient(125deg, #0b124f, #171d70 68%, #10235f); }
-    .hero::before, .hero::after { position: absolute; content: ""; border: 1px solid rgba(91,217,234,.14); border-radius: 50%; pointer-events: none; }
-    .hero::before { width: 510px; height: 510px; top: -290px; left: 8%; }
-    .hero::after { width: 390px; height: 390px; bottom: -270px; right: 24%; }
-    .hero-grid { position: relative; z-index: 1; min-height: 620px; display: grid; grid-template-columns: 1.05fr .95fr; align-items: center; gap: 60px; padding-block: 74px; }
-    .eyebrow { display: inline-flex; align-items: center; gap: 9px; padding: 7px 14px; border: 1px solid rgba(63,225,199,.25); border-radius: 999px; background: rgba(35,201,232,.08); color: #8df0d8; font-size: 12px; font-weight: 600; }
-    .eyebrow span { width: 7px; height: 7px; border-radius: 50%; background: var(--green); box-shadow: 0 0 12px var(--green); }
-    h1 { margin: 20px 0 16px; max-width: 650px; font-size: clamp(36px, 5vw, 56px); line-height: 1.35; letter-spacing: -1.4px; }
-    h1 em { color: #39d9cf; font-style: normal; }
-    .hero-copy { max-width: 570px; margin: 0; color: #cad1ec; font-size: 15px; line-height: 2; }
-    .hero-highlights { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
-    .hero-pill { display: inline-flex; align-items: center; gap: 6px; padding: 5px 12px; border-radius: 999px; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.14); color: #e2e8ff; font-size: 11px; font-weight: 600; }
-    .hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 13px; margin-top: 28px; }
-    .button-outline { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 47px; padding: 0 20px; border: 1px solid rgba(255,255,255,.28); border-radius: 13px; color: white; font-size: 13px; font-weight: 600; transition: background .2s; }
-    .button-outline:hover { background: rgba(255,255,255,.1); }
-    .trust-row { display: flex; align-items: center; gap: 11px; margin-top: 24px; color: #b7bfdc; font-size: 12px; }
-    .trust-check { display: grid; width: 24px; height: 24px; place-items: center; border-radius: 50%; background: rgba(8,201,149,.16); color: #55e5c4; flex: 0 0 24px; }
+      .hero {
+        position: relative;
+        overflow: hidden;
+        color: white;
+        background:
+          radial-gradient(
+            ellipse at 82% 18%,
+            rgba(35, 201, 232, 0.16),
+            transparent 36%
+          ),
+          radial-gradient(
+            ellipse at 6% 88%,
+            rgba(8, 201, 149, 0.14),
+            transparent 35%
+          ),
+          linear-gradient(125deg, #0b124f, #171d70 68%, #10235f);
+      }
+      .hero::before,
+      .hero::after {
+        position: absolute;
+        content: "";
+        border: 1px solid rgba(91, 217, 234, 0.14);
+        border-radius: 50%;
+        pointer-events: none;
+      }
+      .hero::before {
+        width: 510px;
+        height: 510px;
+        top: -290px;
+        left: 8%;
+      }
+      .hero::after {
+        width: 390px;
+        height: 390px;
+        bottom: -270px;
+        right: 24%;
+      }
+      .hero-grid {
+        position: relative;
+        z-index: 1;
+        min-height: 620px;
+        display: grid;
+        grid-template-columns: 1.05fr 0.95fr;
+        align-items: center;
+        gap: 60px;
+        padding-block: 74px;
+      }
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 9px;
+        padding: 7px 14px;
+        border: 1px solid rgba(63, 225, 199, 0.25);
+        border-radius: 999px;
+        background: rgba(35, 201, 232, 0.08);
+        color: #8df0d8;
+        font-size: 12px;
+        font-weight: 600;
+      }
+      .eyebrow span {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: var(--green);
+        box-shadow: 0 0 12px var(--green);
+      }
+      h1 {
+        margin: 20px 0 16px;
+        max-width: 650px;
+        font-size: clamp(36px, 5vw, 56px);
+        line-height: 1.35;
+        letter-spacing: -1.4px;
+      }
+      h1 em {
+        color: #39d9cf;
+        font-style: normal;
+      }
+      .hero-copy {
+        max-width: 570px;
+        margin: 0;
+        color: #cad1ec;
+        font-size: 15px;
+        line-height: 2;
+      }
+      .hero-highlights {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 22px;
+      }
+      .hero-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 5px 12px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        color: #e2e8ff;
+        font-size: 11px;
+        font-weight: 600;
+      }
+      .hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 13px;
+        margin-top: 28px;
+      }
+      .button-outline {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        min-height: 47px;
+        padding: 0 20px;
+        border: 1px solid rgba(255, 255, 255, 0.28);
+        border-radius: 13px;
+        color: white;
+        font-size: 13px;
+        font-weight: 600;
+        transition: background 0.2s;
+      }
+      .button-outline:hover {
+        background: rgba(255, 255, 255, 0.1);
+      }
+      .trust-row {
+        display: flex;
+        align-items: center;
+        gap: 11px;
+        margin-top: 24px;
+        color: #b7bfdc;
+        font-size: 12px;
+      }
+      .trust-check {
+        display: grid;
+        width: 24px;
+        height: 24px;
+        place-items: center;
+        border-radius: 50%;
+        background: rgba(8, 201, 149, 0.16);
+        color: #55e5c4;
+        flex: 0 0 24px;
+      }
 
-    .dashboard { position: relative; min-height: 400px; display: grid; place-items: center; }
-    .glow { position: absolute; width: 360px; height: 360px; border-radius: 50%; background: rgba(30,197,225,.13); filter: blur(60px); }
-    .mockup { position: relative; width: min(100%, 470px); padding: 18px; border: 1px solid rgba(255,255,255,.17); border-radius: 22px; background: rgba(255,255,255,.97); box-shadow: 0 35px 90px rgba(0,0,0,.32); transform: rotate(-1.5deg); }
-    .mock-head { display: flex; align-items: center; justify-content: space-between; padding: 5px 3px 15px; border-bottom: 1px solid var(--line); }
-    .mock-title { font-size: 13px; color: var(--navy); font-weight: 800; }
-    .mock-label { display: inline-block; margin-top: 4px; color: #7e86a0; font-size: 10px; }
-    .mock-dots { color: #a7aec1; letter-spacing: 3px; }
-    .mock-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; padding-block: 16px; }
-    .stat { padding: 11px 10px; border-radius: 12px; background: #f5f7fc; }
-    .stat strong { display: block; color: var(--navy); font-size: 19px; line-height: 1.5; }
-    .stat span { color: #747d98; font-size: 10px; }
-    .stat .green { color: #04b68b; }
-    .seating { padding: 14px; border: 1px solid #edf0f7; border-radius: 14px; background: #fff; }
-    .seating-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; color: #273051; font-size: 11px; font-weight: 700; }
-    .seating-head span:last-child { color: #7d86a0; font-weight: 500; }
-    .seat-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 7px; direction: ltr; }
-    .seat { height: 31px; border-radius: 6px; background: #e7f8f3; border: 1px solid #d5f1e8; }
-    .seat:nth-child(3n), .seat:nth-child(8n) { background: #e5f7fb; border-color: #d5eff4; }
-    .seat:nth-child(5n) { background: #fff5df; border-color: #f8ebca; }
-    .mock-foot { display: flex; justify-content: space-between; margin-top: 12px; color: #6e7794; font-size: 10px; }
-    .floating-card { position: absolute; display: flex; align-items: center; gap: 10px; padding: 11px 14px; border: 1px solid #edf0f7; border-radius: 13px; background: white; box-shadow: 0 12px 35px rgba(6,15,67,.16); color: var(--ink); }
-    .floating-card.top { top: 20px; right: -14px; }
-    .floating-card.bottom { bottom: 16px; left: -24px; }
-    .float-icon { display: grid; width: 34px; height: 34px; place-items: center; border-radius: 10px; background: #e5faf3; color: #08b98c; font-size: 17px; }
-    .floating-card strong { display: block; font-size: 11px; line-height: 1.5; }
-    .floating-card small { display: block; color: #7e86a0; font-size: 10px; }
+      .dashboard {
+        position: relative;
+        min-height: 400px;
+        display: grid;
+        place-items: center;
+      }
+      .glow {
+        position: absolute;
+        width: 360px;
+        height: 360px;
+        border-radius: 50%;
+        background: rgba(30, 197, 225, 0.13);
+        filter: blur(60px);
+      }
+      .mockup {
+        position: relative;
+        width: min(100%, 470px);
+        padding: 18px;
+        border: 1px solid rgba(255, 255, 255, 0.17);
+        border-radius: 22px;
+        background: rgba(255, 255, 255, 0.97);
+        box-shadow: 0 35px 90px rgba(0, 0, 0, 0.32);
+        transform: rotate(-1.5deg);
+      }
+      .mock-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 5px 3px 15px;
+        border-bottom: 1px solid var(--line);
+      }
+      .mock-title {
+        font-size: 13px;
+        color: var(--navy);
+        font-weight: 800;
+      }
+      .mock-label {
+        display: inline-block;
+        margin-top: 4px;
+        color: #7e86a0;
+        font-size: 10px;
+      }
+      .mock-dots {
+        color: #a7aec1;
+        letter-spacing: 3px;
+      }
+      .mock-stats {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+        padding-block: 16px;
+      }
+      .stat {
+        padding: 11px 10px;
+        border-radius: 12px;
+        background: #f5f7fc;
+      }
+      .stat strong {
+        display: block;
+        color: var(--navy);
+        font-size: 19px;
+        line-height: 1.5;
+      }
+      .stat span {
+        color: #747d98;
+        font-size: 10px;
+      }
+      .stat .green {
+        color: #04b68b;
+      }
+      .seating {
+        padding: 14px;
+        border: 1px solid #edf0f7;
+        border-radius: 14px;
+        background: #fff;
+      }
+      .seating-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 12px;
+        color: #273051;
+        font-size: 11px;
+        font-weight: 700;
+      }
+      .seating-head span:last-child {
+        color: #7d86a0;
+        font-weight: 500;
+      }
+      .seat-grid {
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        gap: 7px;
+        direction: ltr;
+      }
+      .seat {
+        height: 31px;
+        border-radius: 6px;
+        background: #e7f8f3;
+        border: 1px solid #d5f1e8;
+      }
+      .seat:nth-child(3n),
+      .seat:nth-child(8n) {
+        background: #e5f7fb;
+        border-color: #d5eff4;
+      }
+      .seat:nth-child(5n) {
+        background: #fff5df;
+        border-color: #f8ebca;
+      }
+      .mock-foot {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 12px;
+        color: #6e7794;
+        font-size: 10px;
+      }
+      .floating-card {
+        position: absolute;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 11px 14px;
+        border: 1px solid #edf0f7;
+        border-radius: 13px;
+        background: white;
+        box-shadow: 0 12px 35px rgba(6, 15, 67, 0.16);
+        color: var(--ink);
+      }
+      .floating-card.top {
+        top: 20px;
+        right: -14px;
+      }
+      .floating-card.bottom {
+        bottom: 16px;
+        left: -24px;
+      }
+      .float-icon {
+        display: grid;
+        width: 34px;
+        height: 34px;
+        place-items: center;
+        border-radius: 10px;
+        background: #e5faf3;
+        color: #08b98c;
+        font-size: 17px;
+      }
+      .floating-card strong {
+        display: block;
+        font-size: 11px;
+        line-height: 1.5;
+      }
+      .floating-card small {
+        display: block;
+        color: #7e86a0;
+        font-size: 10px;
+      }
 
-    .section { padding-block: 88px; }
-    .section.soft { background: var(--soft); }
-    .section-heading { max-width: 680px; margin: 0 auto 38px; text-align: center; }
-    .kicker { color: #08a987; font-size: 12px; font-weight: 700; letter-spacing: .3px; }
-    h2 { margin: 8px 0 12px; color: var(--navy); font-size: clamp(27px, 3.5vw, 38px); line-height: 1.45; letter-spacing: -.7px; }
-    .section-heading p { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.95; }
+      .section {
+        padding-block: 88px;
+      }
+      .section.soft {
+        background: var(--soft);
+      }
+      .section-heading {
+        max-width: 680px;
+        margin: 0 auto 38px;
+        text-align: center;
+      }
+      .kicker {
+        color: #08a987;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.3px;
+      }
+      h2 {
+        margin: 8px 0 12px;
+        color: var(--navy);
+        font-size: clamp(27px, 3.5vw, 38px);
+        line-height: 1.45;
+        letter-spacing: -0.7px;
+      }
+      .section-heading p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 14px;
+        line-height: 1.95;
+      }
 
-    /* تبويبات تصفية المزايا */
-    .filter-tabs { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-bottom: 34px; }
-    .filter-btn { padding: 9px 18px; border-radius: 999px; border: 1px solid var(--line); background: white; color: #4e5977; font-size: 12px; font-weight: 700; cursor: pointer; transition: all .2s; }
-    .filter-btn:hover { border-color: #9de5d3; color: var(--navy); }
-    .filter-btn.active { background: var(--navy); color: white; border-color: var(--navy); box-shadow: 0 8px 20px rgba(16,22,93,.18); }
+      /* تبويبات تصفية المزايا */
+      .filter-tabs {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+        margin-bottom: 34px;
+      }
+      .filter-btn {
+        padding: 9px 18px;
+        border-radius: 999px;
+        border: 1px solid var(--line);
+        background: white;
+        color: #4e5977;
+        font-size: 12px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+      .filter-btn:hover {
+        border-color: #9de5d3;
+        color: var(--navy);
+      }
+      .filter-btn.active {
+        background: var(--navy);
+        color: white;
+        border-color: var(--navy);
+        box-shadow: 0 8px 20px rgba(16, 22, 93, 0.18);
+      }
 
-    .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
-    .feature-card { position: relative; display: flex; flex-direction: column; min-height: 235px; padding: 26px 24px; border: 1px solid var(--line); border-radius: 18px; background: white; transition: transform .25s, box-shadow .25s, border-color .25s; }
-    .feature-card.hidden { display: none; }
-    .feature-card:hover { transform: translateY(-5px); border-color: #b7ebdc; box-shadow: 0 18px 40px rgba(19,34,88,.08); }
-    .feature-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
-    .feature-icon { display: grid; width: 48px; height: 48px; place-items: center; border-radius: 14px; background: #e8fbf5; color: #07ae87; }
-    .feature-icon.blue { background: #e9f9fc; color: #0eabc6; }
-    .feature-icon.navy { background: #eff0fb; color: #263080; }
-    .feature-icon.amber { background: #fff6e5; color: #d97706; }
-    .feature-icon svg { width: 23px; height: 23px; }
-    .feature-badge { padding: 4px 10px; border-radius: 999px; background: #e8fbf5; color: #06896b; font-size: 10px; font-weight: 700; }
-    .feature-badge.blue { background: #e9f9fc; color: #0b849b; }
-    .feature-badge.amber { background: #fff4df; color: #b45309; }
-    .feature-card h3 { margin: 0 0 8px; color: var(--navy); font-size: 16.5px; line-height: 1.5; }
-    .feature-card p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.95; }
-    .feature-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto; padding-top: 14px; }
-    .feature-tags span { padding: 3px 9px; border-radius: 7px; background: #f4f6fb; color: #54607e; font-size: 10.5px; font-weight: 600; }
+      .features-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 18px;
+      }
+      .feature-card {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        min-height: 235px;
+        padding: 26px 24px;
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        background: white;
+        transition:
+          transform 0.25s,
+          box-shadow 0.25s,
+          border-color 0.25s;
+      }
+      .feature-card.hidden {
+        display: none;
+      }
+      .feature-card:hover {
+        transform: translateY(-5px);
+        border-color: #b7ebdc;
+        box-shadow: 0 18px 40px rgba(19, 34, 88, 0.08);
+      }
+      .feature-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 16px;
+      }
+      .feature-icon {
+        display: grid;
+        width: 48px;
+        height: 48px;
+        place-items: center;
+        border-radius: 14px;
+        background: #e8fbf5;
+        color: #07ae87;
+      }
+      .feature-icon.blue {
+        background: #e9f9fc;
+        color: #0eabc6;
+      }
+      .feature-icon.navy {
+        background: #eff0fb;
+        color: #263080;
+      }
+      .feature-icon.amber {
+        background: #fff6e5;
+        color: #d97706;
+      }
+      .feature-icon svg {
+        width: 23px;
+        height: 23px;
+      }
+      .feature-badge {
+        padding: 4px 10px;
+        border-radius: 999px;
+        background: #e8fbf5;
+        color: #06896b;
+        font-size: 10px;
+        font-weight: 700;
+      }
+      .feature-badge.blue {
+        background: #e9f9fc;
+        color: #0b849b;
+      }
+      .feature-badge.amber {
+        background: #fff4df;
+        color: #b45309;
+      }
+      .feature-card h3 {
+        margin: 0 0 8px;
+        color: var(--navy);
+        font-size: 16.5px;
+        line-height: 1.5;
+      }
+      .feature-card p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 13px;
+        line-height: 1.95;
+      }
+      .feature-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin-top: auto;
+        padding-top: 14px;
+      }
+      .feature-tags span {
+        padding: 3px 9px;
+        border-radius: 7px;
+        background: #f4f6fb;
+        color: #54607e;
+        font-size: 10.5px;
+        font-weight: 600;
+      }
 
-    .screens-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-    .screen-card { overflow: hidden; border: 1px solid var(--line); border-radius: 17px; background: white; box-shadow: 0 10px 28px rgba(20,29,86,.05); transition: transform .2s, box-shadow .2s; cursor: zoom-in; text-align: right; padding: 0; }
-    .screen-card:hover { transform: translateY(-4px); box-shadow: 0 18px 38px rgba(20,29,86,.12); }
-    .screen-image { display: block; width: 100%; aspect-ratio: 1.8; object-fit: cover; object-position: top center; background: #edf4f2; }
-    .screen-caption { padding: 16px 18px 19px; }
-    .screen-caption strong { display: block; margin-bottom: 4px; color: var(--navy); font-size: 15px; }
-    .screen-caption span { color: var(--muted); font-size: 12.5px; line-height: 1.8; display: block; }
+      .screens-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+      }
+      .screen-card {
+        overflow: hidden;
+        border: 1px solid var(--line);
+        border-radius: 17px;
+        background: white;
+        box-shadow: 0 10px 28px rgba(20, 29, 86, 0.05);
+        transition:
+          transform 0.2s,
+          box-shadow 0.2s;
+        cursor: zoom-in;
+        text-align: right;
+        padding: 0;
+      }
+      .screen-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 18px 38px rgba(20, 29, 86, 0.12);
+      }
+      .screen-image {
+        display: block;
+        width: 100%;
+        aspect-ratio: 1.8;
+        object-fit: cover;
+        object-position: top center;
+        background: #edf4f2;
+      }
+      .screen-caption {
+        padding: 16px 18px 19px;
+      }
+      .screen-caption strong {
+        display: block;
+        margin-bottom: 4px;
+        color: var(--navy);
+        font-size: 15px;
+      }
+      .screen-caption span {
+        color: var(--muted);
+        font-size: 12.5px;
+        line-height: 1.8;
+        display: block;
+      }
 
-    /* عارض الصور المنبثق */
-    .lightbox { position: fixed; inset: 0; z-index: 50; display: none; align-items: center; justify-content: center; background: rgba(9, 14, 72, .88); backdrop-filter: blur(6px); padding: 24px; }
-    .lightbox.open { display: flex; }
-    .lightbox-box { position: relative; width: min(1040px, 100%); background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 30px 90px rgba(0,0,0,.45); }
-    .lightbox-img { display: block; width: 100%; max-height: 72vh; object-fit: contain; background: #f3f6fb; }
-    .lightbox-bar { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 14px 20px; border-top: 1px solid var(--line); }
-    .lightbox-info strong { display: block; color: var(--navy); font-size: 15px; }
-    .lightbox-info span { color: var(--muted); font-size: 12px; }
-    .lightbox-actions { display: flex; align-items: center; gap: 8px; }
-    .lb-btn { display: inline-flex; align-items: center; justify-content: center; width: 38px; height: 38px; border-radius: 10px; border: 1px solid var(--line); background: white; color: var(--navy); font-weight: 700; cursor: pointer; }
-    .lb-btn:hover { background: var(--soft); }
+      /* عارض الصور المنبثق */
+      .lightbox {
+        position: fixed;
+        inset: 0;
+        z-index: 50;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        background: rgba(9, 14, 72, 0.88);
+        backdrop-filter: blur(6px);
+        padding: 24px;
+      }
+      .lightbox.open {
+        display: flex;
+      }
+      .lightbox-box {
+        position: relative;
+        width: min(1040px, 100%);
+        background: white;
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 30px 90px rgba(0, 0, 0, 0.45);
+      }
+      .lightbox-img {
+        display: block;
+        width: 100%;
+        max-height: 72vh;
+        object-fit: contain;
+        background: #f3f6fb;
+      }
+      .lightbox-bar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 14px 20px;
+        border-top: 1px solid var(--line);
+      }
+      .lightbox-info strong {
+        display: block;
+        color: var(--navy);
+        font-size: 15px;
+      }
+      .lightbox-info span {
+        color: var(--muted);
+        font-size: 12px;
+      }
+      .lightbox-actions {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .lb-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 38px;
+        height: 38px;
+        border-radius: 10px;
+        border: 1px solid var(--line);
+        background: white;
+        color: var(--navy);
+        font-weight: 700;
+        cursor: pointer;
+      }
+      .lb-btn:hover {
+        background: var(--soft);
+      }
 
-    .workflow { display: grid; grid-template-columns: 1fr 1fr; gap: 65px; align-items: center; }
-    .workflow .section-heading { margin: 0 0 23px; text-align: right; }
-    .steps { display: grid; gap: 17px; margin-top: 24px; }
-    .step { display: flex; align-items: flex-start; gap: 14px; }
-    .step-no { flex: 0 0 34px; display: grid; width: 34px; height: 34px; place-items: center; border-radius: 10px; background: #e8fbf5; color: #079c7c; font-size: 13px; font-weight: 800; }
-    .step strong { display: block; color: var(--navy); font-size: 14px; }
-    .step p { margin: 3px 0 0; color: var(--muted); font-size: 12.5px; line-height: 1.75; }
-    .workflow-panel { position: relative; padding: 28px; border-radius: 23px; background: linear-gradient(145deg, #10165d, #20277b); box-shadow: var(--shadow); color: white; }
-    .workflow-panel::before { position: absolute; inset: 14px; border: 1px solid rgba(255,255,255,.1); border-radius: 16px; content: ""; pointer-events: none; }
-    .panel-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 22px; font-size: 13px; font-weight: 700; }
-    .live { padding: 5px 11px; border-radius: 20px; background: rgba(8,201,149,.16); color: #66e4c4; font-size: 10.5px; }
-    .class-bars { display: grid; gap: 14px; }
-    .class-row { display: grid; grid-template-columns: 92px 1fr 44px; align-items: center; gap: 10px; color: #d2d7ee; font-size: 11px; }
-    .bar { height: 9px; overflow: hidden; border-radius: 20px; background: rgba(255,255,255,.12); }
-    .bar i { display: block; height: 100%; border-radius: inherit; background: linear-gradient(90deg, var(--green), var(--blue)); }
-    .class-row b { color: #fff; text-align: left; font-size: 11px; }
-    .panel-note { display: flex; align-items: center; gap: 9px; margin-top: 24px; padding: 12px 14px; border: 1px solid rgba(94,235,203,.2); border-radius: 12px; background: rgba(8,201,149,.08); color: #baf5e2; font-size: 11.5px; line-height: 1.6; }
-    .panel-note svg { flex: 0 0 18px; color: #4be0b9; }
+      .workflow {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 65px;
+        align-items: center;
+      }
+      .workflow .section-heading {
+        margin: 0 0 23px;
+        text-align: right;
+      }
+      .steps {
+        display: grid;
+        gap: 17px;
+        margin-top: 24px;
+      }
+      .step {
+        display: flex;
+        align-items: flex-start;
+        gap: 14px;
+      }
+      .step-no {
+        flex: 0 0 34px;
+        display: grid;
+        width: 34px;
+        height: 34px;
+        place-items: center;
+        border-radius: 10px;
+        background: #e8fbf5;
+        color: #079c7c;
+        font-size: 13px;
+        font-weight: 800;
+      }
+      .step strong {
+        display: block;
+        color: var(--navy);
+        font-size: 14px;
+      }
+      .step p {
+        margin: 3px 0 0;
+        color: var(--muted);
+        font-size: 12.5px;
+        line-height: 1.75;
+      }
+      .workflow-panel {
+        position: relative;
+        padding: 28px;
+        border-radius: 23px;
+        background: linear-gradient(145deg, #10165d, #20277b);
+        box-shadow: var(--shadow);
+        color: white;
+      }
+      .workflow-panel::before {
+        position: absolute;
+        inset: 14px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 16px;
+        content: "";
+        pointer-events: none;
+      }
+      .panel-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 22px;
+        font-size: 13px;
+        font-weight: 700;
+      }
+      .live {
+        padding: 5px 11px;
+        border-radius: 20px;
+        background: rgba(8, 201, 149, 0.16);
+        color: #66e4c4;
+        font-size: 10.5px;
+      }
+      .class-bars {
+        display: grid;
+        gap: 14px;
+      }
+      .class-row {
+        display: grid;
+        grid-template-columns: 92px 1fr 44px;
+        align-items: center;
+        gap: 10px;
+        color: #d2d7ee;
+        font-size: 11px;
+      }
+      .bar {
+        height: 9px;
+        overflow: hidden;
+        border-radius: 20px;
+        background: rgba(255, 255, 255, 0.12);
+      }
+      .bar i {
+        display: block;
+        height: 100%;
+        border-radius: inherit;
+        background: linear-gradient(90deg, var(--green), var(--blue));
+      }
+      .class-row b {
+        color: #fff;
+        text-align: left;
+        font-size: 11px;
+      }
+      .panel-note {
+        display: flex;
+        align-items: center;
+        gap: 9px;
+        margin-top: 24px;
+        padding: 12px 14px;
+        border: 1px solid rgba(94, 235, 203, 0.2);
+        border-radius: 12px;
+        background: rgba(8, 201, 149, 0.08);
+        color: #baf5e2;
+        font-size: 11.5px;
+        line-height: 1.6;
+      }
+      .panel-note svg {
+        flex: 0 0 18px;
+        color: #4be0b9;
+      }
 
-    .benefit-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; }
-    .benefit { text-align: center; padding: 18px 14px; border: 1px solid var(--line); border-radius: 16px; background: #fbfcff; }
-    .benefit-icon { display: grid; width: 54px; height: 54px; margin: 0 auto 14px; place-items: center; border-radius: 17px; background: white; color: #09ac88; box-shadow: 0 8px 24px rgba(26,42,99,.08); }
-    .benefit-icon svg { width: 24px; }
-    .benefit h3 { margin: 0 0 6px; color: var(--navy); font-size: 15px; }
-    .benefit p { margin: 0; color: var(--muted); font-size: 12.5px; line-height: 1.75; }
+      .benefit-row {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 22px;
+      }
+      .benefit {
+        text-align: center;
+        padding: 18px 14px;
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        background: #fbfcff;
+      }
+      .benefit-icon {
+        display: grid;
+        width: 54px;
+        height: 54px;
+        margin: 0 auto 14px;
+        place-items: center;
+        border-radius: 17px;
+        background: white;
+        color: #09ac88;
+        box-shadow: 0 8px 24px rgba(26, 42, 99, 0.08);
+      }
+      .benefit-icon svg {
+        width: 24px;
+      }
+      .benefit h3 {
+        margin: 0 0 6px;
+        color: var(--navy);
+        font-size: 15px;
+      }
+      .benefit p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 12.5px;
+        line-height: 1.75;
+      }
 
-    /* الأسئلة الشائعة */
-    .faq-list { max-width: 860px; margin-inline: auto; display: grid; gap: 12px; }
-    .faq-item { border: 1px solid var(--line); border-radius: 16px; background: white; transition: border-color .2s, box-shadow .2s; overflow: hidden; }
-    .faq-item[open] { border-color: #b7ebdc; box-shadow: 0 12px 30px rgba(19, 34, 88, .06); }
-    .faq-q { list-style: none; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 18px 22px; color: var(--navy); font-size: 14.5px; font-weight: 700; cursor: pointer; user-select: none; }
-    .faq-q::-webkit-details-marker { display: none; }
-    .faq-q::after { content: "+"; flex: 0 0 28px; display: grid; place-items: center; width: 28px; height: 28px; border-radius: 8px; background: #eef2fb; color: var(--navy); font-size: 17px; font-weight: 700; transition: transform .2s, background .2s; }
-    .faq-item[open] .faq-q::after { content: "−"; background: #e8fbf5; color: #079c7c; }
-    .faq-a { padding: 0 22px 18px; color: var(--muted); font-size: 13px; line-height: 1.95; border-top: 1px solid #f1f4fa; padding-top: 13px; }
+      /* الأسئلة الشائعة */
+      .faq-list {
+        max-width: 860px;
+        margin-inline: auto;
+        display: grid;
+        gap: 12px;
+      }
+      .faq-item {
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        background: white;
+        transition:
+          border-color 0.2s,
+          box-shadow 0.2s;
+        overflow: hidden;
+      }
+      .faq-item[open] {
+        border-color: #b7ebdc;
+        box-shadow: 0 12px 30px rgba(19, 34, 88, 0.06);
+      }
+      .faq-q {
+        list-style: none;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 18px 22px;
+        color: var(--navy);
+        font-size: 14.5px;
+        font-weight: 700;
+        cursor: pointer;
+        user-select: none;
+      }
+      .faq-q::-webkit-details-marker {
+        display: none;
+      }
+      .faq-q::after {
+        content: "+";
+        flex: 0 0 28px;
+        display: grid;
+        place-items: center;
+        width: 28px;
+        height: 28px;
+        border-radius: 8px;
+        background: #eef2fb;
+        color: var(--navy);
+        font-size: 17px;
+        font-weight: 700;
+        transition:
+          transform 0.2s,
+          background 0.2s;
+      }
+      .faq-item[open] .faq-q::after {
+        content: "−";
+        background: #e8fbf5;
+        color: #079c7c;
+      }
+      .faq-a {
+        padding: 0 22px 18px;
+        color: var(--muted);
+        font-size: 13px;
+        line-height: 1.95;
+        border-top: 1px solid #f1f4fa;
+        padding-top: 13px;
+      }
 
-    .cta { padding-block: 76px; background: linear-gradient(115deg, #0d1455, #171e71); color: white; }
-    .cta-box { display: flex; align-items: center; justify-content: space-between; gap: 30px; }
-    .cta h2 { margin: 0 0 8px; color: white; font-size: 30px; }
-    .cta p { margin: 0; color: #c4cae5; font-size: 13.5px; }
-    .cta .button { flex: 0 0 auto; }
+      .cta {
+        padding-block: 76px;
+        background: linear-gradient(115deg, #0d1455, #171e71);
+        color: white;
+      }
+      .cta-box {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 30px;
+      }
+      .cta h2 {
+        margin: 0 0 8px;
+        color: white;
+        font-size: 30px;
+      }
+      .cta p {
+        margin: 0;
+        color: #c4cae5;
+        font-size: 13.5px;
+      }
+      .cta .button {
+        flex: 0 0 auto;
+      }
 
-    footer { padding-block: 28px; background: #090e43; color: #b9c0df; }
-    .footer-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 18px; font-size: 12px; }
-    .footer-brand { display: flex; align-items: center; gap: 9px; color: white; font-weight: 700; }
-    .footer-brand img { width: 30px; height: 30px; object-fit: cover; border-radius: 8px; }
-    .footer-links { display: flex; align-items: center; gap: 20px; }
-    .footer-links a:hover { color: #54dfc2; }
+      .downloads-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+        max-width: 820px;
+        margin-inline: auto;
+      }
+      .download-card {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        min-height: 150px;
+        padding: 24px;
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        background: white;
+        box-shadow: 0 10px 28px rgba(20, 29, 86, 0.05);
+        transition:
+          transform 0.2s,
+          box-shadow 0.2s,
+          border-color 0.2s;
+      }
+      .download-card:hover {
+        transform: translateY(-4px);
+        border-color: #b7ebdc;
+        box-shadow: 0 18px 38px rgba(20, 29, 86, 0.12);
+      }
+      .download-icon {
+        flex: 0 0 58px;
+        display: grid;
+        width: 58px;
+        height: 58px;
+        place-items: center;
+        border-radius: 16px;
+        background: #edf8ff;
+        color: #2878c7;
+      }
+      .download-icon.extension {
+        background: #e9fbf5;
+        color: #079c7c;
+      }
+      .download-icon svg {
+        width: 30px;
+        height: 30px;
+      }
+      .download-copy {
+        flex: 1;
+      }
+      .download-copy strong {
+        display: block;
+        margin-bottom: 4px;
+        color: var(--navy);
+        font-size: 16px;
+      }
+      .download-copy span {
+        display: block;
+        margin-bottom: 12px;
+        color: var(--muted);
+        font-size: 12.5px;
+        line-height: 1.7;
+      }
+      .download-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        color: #079c7c;
+        font-size: 12.5px;
+        font-weight: 800;
+      }
+      .trial-box {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+        max-width: 820px;
+        margin: 20px auto 0;
+        padding: 20px 22px;
+        border: 1px solid #b7ebdc;
+        border-radius: 16px;
+        background: linear-gradient(105deg, #effcf7, #edf8ff);
+      }
+      .trial-copy strong {
+        display: block;
+        color: var(--navy);
+        font-size: 15px;
+      }
+      .trial-copy span {
+        display: block;
+        margin-top: 3px;
+        color: var(--muted);
+        font-size: 12.5px;
+      }
+      .trial-code {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .trial-code code {
+        direction: ltr;
+        min-width: 260px;
+        padding: 10px 14px;
+        border: 1px solid #d9e8e4;
+        border-radius: 10px;
+        background: white;
+        color: var(--navy);
+        font-family: Consolas, monospace;
+        font-size: 13.5px;
+        text-align: center;
+        user-select: all;
+      }
+      .copy-code {
+        min-height: 40px;
+        padding-inline: 14px;
+        white-space: nowrap;
+      }
+      .download-link:hover {
+        color: #057b63;
+      }
 
-    @media (max-width: 900px) {
-      .nav-links { gap: 16px; }
-      .hero-grid { gap: 28px; min-height: 560px; }
-      .features-grid { grid-template-columns: repeat(2, 1fr); }
-      .screens-grid { grid-template-columns: repeat(2, 1fr); }
-      .workflow { gap: 38px; }
-      .benefit-row { grid-template-columns: repeat(2, 1fr); }
-    }
-    @media (max-width: 700px) {
-      .container { width: min(100% - 36px, 540px); }
-      .topbar-inner { justify-content: center; min-height: 36px; }
-      .topbar-inner > span:first-child { display: none; }
-      .nav { min-height: 68px; }
-      .brand { font-size: 17px; }
-      .brand img { width: 38px; height: 38px; }
-      .menu-toggle { display: inline-flex; }
-      .nav > .button { display: none; }
-      .nav-links { position: absolute; top: calc(100% + 1px); inset-inline: 0; display: none; flex-direction: column; align-items: stretch; gap: 0; padding: 9px 22px 17px; border-bottom: 1px solid var(--line); background: white; box-shadow: 0 15px 25px rgba(22,31,83,.08); }
-      .nav-links.open { display: flex; }
-      .nav-links a { padding: 11px 0; }
-      .hero-grid { grid-template-columns: 1fr; gap: 20px; padding-block: 52px 44px; }
-      .hero-copy { font-size: 13.5px; }
-      .dashboard { min-height: 350px; margin-top: 8px; }
-      .mockup { max-width: 420px; transform: none; }
-      .floating-card.top { right: 0; }
-      .floating-card.bottom { left: 0; }
-      .section { padding-block: 66px; }
-      .section-heading { margin-bottom: 28px; }
-      .features-grid { grid-template-columns: 1fr; gap: 14px; }
-      .feature-card { min-height: auto; padding: 20px 18px; }
-      .screens-grid { grid-template-columns: 1fr; gap: 14px; }
-      .workflow { grid-template-columns: 1fr; gap: 32px; }
-      .benefit-row { grid-template-columns: 1fr; gap: 14px; }
-      .cta-box { align-items: flex-start; flex-direction: column; }
-      .cta { padding-block: 54px; }
-      .footer-inner { flex-direction: column; text-align: center; }
-    }
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; }
-    }
-  </style>
-</head>
-<body>
-  <div class="topbar">
-    <div class="container topbar-inner">
-      <span>منصة واحدة… لكل تفاصيل الاختبارات المدرسية</span>
-      <span>تحتاج مساعدة؟ <a href="https://wa.me/966542158808" target="_blank" rel="noopener noreferrer">تواصل معنا عبر واتساب</a></span>
-    </div>
-  </div>
+      footer {
+        padding-block: 28px;
+        background: #090e43;
+        color: #b9c0df;
+      }
+      .footer-inner {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 18px;
+        font-size: 12px;
+      }
+      .footer-brand {
+        display: flex;
+        align-items: center;
+        gap: 9px;
+        color: white;
+        font-weight: 700;
+      }
+      .footer-brand img {
+        width: 30px;
+        height: 30px;
+        object-fit: cover;
+        border-radius: 8px;
+      }
+      .footer-links {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+      }
+      .footer-links a:hover {
+        color: #54dfc2;
+      }
 
-  <header>
-    <nav class="container nav" aria-label="التنقل الرئيسي">
-      <a class="brand" href="#الرئيسية" aria-label="إكزامكس - الرئيسية">
-        <img src="icons/app_icon.png" alt="">
-        <span>إكزامكس<small>EXAMIX</small></span>
-      </a>
-      <button class="menu-toggle" type="button" aria-label="فتح القائمة" aria-expanded="false">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
-      </button>
-      <div class="nav-links">
-        <a href="#المزايا">المزايا</a>
-        <a href="#من-داخل-إكزامكس">من داخل التطبيق</a>
-        <a href="#الخطوات">آلية التوزيع</a>
-        <a href="#الأسئلة-الشائعة">الأسئلة الشائعة</a>
-        <a href="#الدعم">الدعم</a>
-        <a href="https://drive.google.com/file/d/1HYcGllLmbrB_qonxqwquVGE6NuvyK__v/view?usp=sharing" target="_blank" rel="noopener noreferrer">تنزيل تطبيق ويندوز</a>
+      @media (max-width: 900px) {
+        .nav-links {
+          gap: 16px;
+        }
+        .hero-grid {
+          gap: 28px;
+          min-height: 560px;
+        }
+        .features-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .screens-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .workflow {
+          gap: 38px;
+        }
+        .benefit-row {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .downloads-grid {
+          max-width: 760px;
+        }
+      }
+      @media (max-width: 700px) {
+        .container {
+          width: min(100% - 36px, 540px);
+        }
+        .topbar-inner {
+          justify-content: center;
+          min-height: 36px;
+        }
+        .topbar-inner > span:first-child {
+          display: none;
+        }
+        .nav {
+          min-height: 68px;
+        }
+        .brand {
+          font-size: 17px;
+        }
+        .brand img {
+          width: 38px;
+          height: 38px;
+        }
+        .menu-toggle {
+          display: inline-flex;
+        }
+        .nav > .button {
+          display: none;
+        }
+        .nav-links {
+          position: absolute;
+          top: calc(100% + 1px);
+          inset-inline: 0;
+          display: none;
+          flex-direction: column;
+          align-items: stretch;
+          gap: 0;
+          padding: 9px 22px 17px;
+          border-bottom: 1px solid var(--line);
+          background: white;
+          box-shadow: 0 15px 25px rgba(22, 31, 83, 0.08);
+        }
+        .nav-links.open {
+          display: flex;
+        }
+        .nav-links a {
+          padding: 11px 0;
+        }
+        .hero-grid {
+          grid-template-columns: 1fr;
+          gap: 20px;
+          padding-block: 52px 44px;
+        }
+        .hero-copy {
+          font-size: 13.5px;
+        }
+        .dashboard {
+          min-height: 350px;
+          margin-top: 8px;
+        }
+        .mockup {
+          max-width: 420px;
+          transform: none;
+        }
+        .floating-card.top {
+          right: 0;
+        }
+        .floating-card.bottom {
+          left: 0;
+        }
+        .section {
+          padding-block: 66px;
+        }
+        .section-heading {
+          margin-bottom: 28px;
+        }
+        .features-grid {
+          grid-template-columns: 1fr;
+          gap: 14px;
+        }
+        .feature-card {
+          min-height: auto;
+          padding: 20px 18px;
+        }
+        .screens-grid {
+          grid-template-columns: 1fr;
+          gap: 14px;
+        }
+        .workflow {
+          grid-template-columns: 1fr;
+          gap: 32px;
+        }
+        .benefit-row {
+          grid-template-columns: 1fr;
+          gap: 14px;
+        }
+        .downloads-grid {
+          grid-template-columns: 1fr;
+        }
+        .download-card {
+          min-height: auto;
+        }
+        .trial-box {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+        .trial-code {
+          width: 100%;
+          align-items: stretch;
+          flex-direction: column;
+        }
+        .trial-code code {
+          min-width: 0;
+          width: 100%;
+          font-size: 12.5px;
+        }
+        .cta-box {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+        .cta {
+          padding-block: 54px;
+        }
+        .footer-inner {
+          flex-direction: column;
+          text-align: center;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          scroll-behavior: auto !important;
+          transition-duration: 0.01ms !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="topbar">
+      <div class="container topbar-inner">
+        <span>منصة واحدة… لكل تفاصيل الاختبارات المدرسية</span>
+        <span
+          >تحتاج مساعدة؟
+          <a
+            href="https://wa.me/966542158808"
+            target="_blank"
+            rel="noopener noreferrer"
+            >تواصل معنا عبر واتساب</a
+          ></span
+        >
       </div>
-      <a class="button" href="https://wa.me/966542158808" target="_blank" rel="noopener noreferrer">ابدأ رحلتك <span aria-hidden="true">←</span></a>
-    </nav>
-  </header>
+    </div>
 
-  <main>
-    <section class="hero" id="الرئيسية">
-      <div class="container hero-grid">
-        <div>
-          <div class="eyebrow"><span></span> إدارة الاختبارات… بطريقة أذكى وأدق</div>
-          <h1>اختباراتك<br><em>تُدار بذكاء.</em></h1>
-          <p class="hero-copy">من استيراد طلاب نظام نور وتسكين اللجان، إلى طباعة نماذج OMR وقراءة أوراق الإجابة وحصر الغياب، وصولاً إلى كشوف الدرجات والمزامنة السحابية؛ كل أدوات الاختبارات في منصة واحدة.</p>
-          <div class="hero-highlights">
-            <span class="hero-pill">✓ متوافق مع نظام نور</span>
-            <span class="hero-pill">✓ تصحيح OMR من PDF والصور</span>
-            <span class="hero-pill">✓ حصر الغياب التلقائي</span>
-            <span class="hero-pill">✓ مزامنة سحابية وأرشيف</span>
+    <header>
+      <nav class="container nav" aria-label="التنقل الرئيسي">
+        <a class="brand" href="#الرئيسية" aria-label="إكزامكس - الرئيسية">
+          <img src="icons/app_icon.png" alt="" />
+          <span>إكزامكس<small>EXAMIX</small></span>
+        </a>
+        <button
+          class="menu-toggle"
+          type="button"
+          aria-label="فتح القائمة"
+          aria-expanded="false"
+        >
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path d="M4 7h16M4 12h16M4 17h16" />
+          </svg>
+        </button>
+        <div class="nav-links">
+          <a href="#المزايا">المزايا</a>
+          <a href="#من-داخل-إكزامكس">من داخل التطبيق</a>
+          <a href="#الخطوات">آلية التوزيع</a>
+          <a href="#الأسئلة-الشائعة">الأسئلة الشائعة</a>
+          <a href="#الدعم">الدعم</a>
+          <a href="#التحميلات">التحميلات</a>
+        </div>
+        <a
+          class="button"
+          href="https://wa.me/966542158808"
+          target="_blank"
+          rel="noopener noreferrer"
+          >ابدأ رحلتك <span aria-hidden="true">←</span></a
+        >
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero" id="الرئيسية">
+        <div class="container hero-grid">
+          <div>
+            <div class="eyebrow">
+              <span></span> إدارة الاختبارات… بطريقة أذكى وأدق
+            </div>
+            <h1>اختباراتك<br /><em>تُدار بذكاء.</em></h1>
+            <p class="hero-copy">
+              من استيراد طلاب نظام نور وتسكين اللجان، إلى طباعة نماذج OMR وقراءة
+              أوراق الإجابة وحصر الغياب، وصولاً إلى كشوف الدرجات والمزامنة
+              السحابية؛ كل أدوات الاختبارات في منصة واحدة.
+            </p>
+            <div class="hero-highlights">
+              <span class="hero-pill">✓ متوافق مع نظام نور</span>
+              <span class="hero-pill">✓ تصحيح OMR من PDF والصور</span>
+              <span class="hero-pill">✓ حصر الغياب التلقائي</span>
+              <span class="hero-pill">✓ مزامنة سحابية وأرشيف</span>
+            </div>
+            <div class="hero-actions">
+              <a class="button" href="#المزايا"
+                >اكتشف المزايا الـ ١٢ <span aria-hidden="true">←</span></a
+              >
+              <a
+                class="button-outline"
+                href="https://wa.me/966542158808"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  width="17"
+                  height="17"
+                >
+                  <path
+                    d="M20.5 11.7a8.6 8.6 0 0 1-12.7 7.6L3 20.5l1.2-4.6a8.6 8.6 0 1 1 16.3-4.2Z"
+                  />
+                  <path
+                    d="M8.7 8.1c.2-.5.4-.5.7-.5h.5c.2 0 .4.1.5.4l.7 1.7c.1.2 0 .4-.1.6l-.5.6c-.2.2-.2.4-.1.6.4.8 1.1 1.5 1.9 1.9.2.1.4.1.6-.1l.7-.8c.2-.2.4-.2.6-.1l1.6.8c.2.1.3.3.3.5 0 .3-.2 1.2-.8 1.5-.6.4-1.3.5-2.2.2-1-.3-2.2-.8-3.4-2-1.1-1.1-1.8-2.4-2-3.3-.2-1 .1-1.7.5-2Z"
+                  />
+                </svg>
+                تواصل مع الدعم
+              </a>
+            </div>
+            <div class="trust-row">
+              <span class="trust-check">✓</span> يعمل محلياً دون اتصال دائم
+              بالإنترنت، مع مزامنة آمنة للسحابة والسماح بالدخول من عدة أجهزة
+            </div>
           </div>
-          <div class="hero-actions">
-            <a class="button" href="#المزايا">اكتشف المزايا الـ ١٢ <span aria-hidden="true">←</span></a>
-            <a class="button-outline" href="https://wa.me/966542158808" target="_blank" rel="noopener noreferrer">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="17" height="17"><path d="M20.5 11.7a8.6 8.6 0 0 1-12.7 7.6L3 20.5l1.2-4.6a8.6 8.6 0 1 1 16.3-4.2Z"/><path d="M8.7 8.1c.2-.5.4-.5.7-.5h.5c.2 0 .4.1.5.4l.7 1.7c.1.2 0 .4-.1.6l-.5.6c-.2.2-.2.4-.1.6.4.8 1.1 1.5 1.9 1.9.2.1.4.1.6-.1l.7-.8c.2-.2.4-.2.6-.1l1.6.8c.2.1.3.3.3.5 0 .3-.2 1.2-.8 1.5-.6.4-1.3.5-2.2.2-1-.3-2.2-.8-3.4-2-1.1-1.1-1.8-2.4-2-3.3-.2-1 .1-1.7.5-2Z"/></svg>
-              تواصل مع الدعم
+
+          <div
+            class="dashboard"
+            aria-label="معاينة توضيحية لتوزيع الطلاب على اللجان"
+          >
+            <div class="glow"></div>
+            <div class="mockup">
+              <div class="mock-head">
+                <div>
+                  <div class="mock-title">لوحة الاختبارات والتصحيح</div>
+                  <span class="mock-label"
+                    >الاختبارات النهائية · متابعة حية</span
+                  >
+                </div>
+                <span class="mock-dots">•••</span>
+              </div>
+              <div class="mock-stats">
+                <div class="stat">
+                  <strong>٣٦٨</strong><span>طالب وطالبة</span>
+                </div>
+                <div class="stat">
+                  <strong>١٢</strong><span>لجنة اختبار</span>
+                </div>
+                <div class="stat">
+                  <strong class="green">١٠٠٪</strong><span>نسبة التسكين</span>
+                </div>
+              </div>
+              <div class="seating">
+                <div class="seating-head">
+                  <span>توزيع المقاعد · اللجنة ٠١</span><span>٣٢ / ٣٢</span>
+                </div>
+                <div class="seat-grid">
+                  <i class="seat"></i><i class="seat"></i><i class="seat"></i
+                  ><i class="seat"></i><i class="seat"></i><i class="seat"></i>
+                  <i class="seat"></i><i class="seat"></i><i class="seat"></i
+                  ><i class="seat"></i><i class="seat"></i><i class="seat"></i>
+                  <i class="seat"></i><i class="seat"></i><i class="seat"></i
+                  ><i class="seat"></i><i class="seat"></i><i class="seat"></i>
+                  <i class="seat"></i><i class="seat"></i><i class="seat"></i
+                  ><i class="seat"></i><i class="seat"></i><i class="seat"></i>
+                </div>
+                <div class="mock-foot">
+                  <span>مقاعد موزعة حسب الصف والشعبة</span><span>✓ مكتمل</span>
+                </div>
+              </div>
+            </div>
+            <div class="floating-card top">
+              <span class="float-icon">✓</span
+              ><span
+                ><strong>اكتمل التوزيع</strong
+                ><small>محرك تحقق قبل الطباعة</small></span
+              >
+            </div>
+            <div class="floating-card bottom">
+              <span class="float-icon">✳</span
+              ><span
+                ><strong>تصحيح ومقارنة الغياب</strong
+                ><small>رصد تلقائي لـ (غائب / 0)</small></span
+              >
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="المزايا">
+        <div class="container">
+          <div class="section-heading">
+            <span class="kicker">مزايا شاملة ومحدثة</span>
+            <h2>رحلة اختبار متكاملة<br />من البداية إلى النتيجة</h2>
+            <p>
+              أدوات عملية مترابطة تغطي إدارة المراحل، توزيع اللجان، طباعة وتصحيح
+              OMR، متابعة الغياب، والتقارير والمزامنة السحابية.
+            </p>
+          </div>
+
+          <div class="filter-tabs" role="tablist" aria-label="تصنيف المزايا">
+            <button class="filter-btn active" type="button" data-filter="all">
+              جميع المزايا (١٢)
+            </button>
+            <button class="filter-btn" type="button" data-filter="committees">
+              الطلاب واللجان
+            </button>
+            <button class="filter-btn" type="button" data-filter="exams">
+              الاختبارات والتصحيح
+            </button>
+            <button class="filter-btn" type="button" data-filter="reports">
+              التقارير والمزامنة
+            </button>
+          </div>
+
+          <div class="features-grid">
+            <article class="feature-card" data-category="committees">
+              <div class="feature-top">
+                <div class="feature-icon navy">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                  >
+                    <path
+                      d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v16H6.5A2.5 2.5 0 0 0 4 21V5.5Z"
+                    />
+                    <path d="M4 17a2.5 2.5 0 0 1 2.5-2.5H20M8 7h8M8 10h6" />
+                  </svg>
+                </div>
+                <span class="feature-badge">عزل كامل</span>
+              </div>
+              <h3>إدارة مراحل دراسية متعددة</h3>
+              <p>
+                أنشئ مراحل دراسية مستقلة (ابتدائي، متوسط، ثانوي...) بحيث تمتلك
+                كل مرحلة قاعدة طلابها ولجانها واختباراتها بشكل منظم ومنفصل.
+              </p>
+              <div class="feature-tags">
+                <span>تعدد المراحل</span><span>تبديل فوري</span>
+              </div>
+            </article>
+
+            <article class="feature-card" data-category="committees">
+              <div class="feature-top">
+                <div class="feature-icon blue">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                  >
+                    <path d="M12 16V4m0 0L8 8m4-4 4 4" />
+                    <path d="M5 13v5a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-5" />
+                  </svg>
+                </div>
+                <span class="feature-badge blue">نظام نور</span>
+              </div>
+              <h3>استيراد ذكي من نظام نور</h3>
+              <p>
+                استورد كشوف الطلاب من Excel مباشرة عبر «تقارير ← الطلاب ← كشف
+                الطلاب» مع تعرف تلقائي على الأسماء والهويات والصفوف والشعب.
+              </p>
+              <div class="feature-tags">
+                <span>ملفات Excel</span><span>فرز تلقائي</span>
+              </div>
+            </article>
+
+            <article class="feature-card" data-category="committees">
+              <div class="feature-top">
+                <div class="feature-icon">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                  >
+                    <rect x="3" y="4" width="18" height="16" rx="2" />
+                    <path
+                      d="M8 8h3v3H8zM14 8h3M14 11h3M8 14h3M14 14h3M8 17h9"
+                    />
+                  </svg>
+                </div>
+                <span class="feature-badge">٤ استراتيجيات</span>
+              </div>
+              <h3>لجان وتسكين مرن ومحرك تحقق</h3>
+              <p>
+                وزّع الطلاب بمرونة (في فصولهم، تسلسلي، متوازن، مخصص بالحصص أو
+                الأعمدة) مع منع تكرار أسماء اللجان ومحرك تحقق يكشف أي نقص قبل
+                الطباعة.
+              </p>
+              <div class="feature-tags">
+                <span>توزيع الأعمدة</span><span>أرقام جلوس</span>
+              </div>
+            </article>
+
+            <article class="feature-card" data-category="committees">
+              <div class="feature-top">
+                <div class="feature-icon navy">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                  >
+                    <path d="M6 3h9l4 4v14H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Z" />
+                    <path d="M14 3v5h5M8 13h8M8 17h8" />
+                  </svg>
+                </div>
+                <span class="feature-badge">طباعة فورية</span>
+              </div>
+              <h3>كشوف الاستلام وملصقات اللجان</h3>
+              <p>
+                أصدر كشوف التوقيع والاستلام، وملصقات الطاولات وأبواب اللجان
+                جاهزة للطباعة بصيغة PDF مع نافذة معاينة تفاعلية وتكبير وتمرير
+                سلس.
+              </p>
+              <div class="feature-tags">
+                <span>كشوف مناداة</span><span>ملصقات طاولات</span>
+              </div>
+            </article>
+
+            <article class="feature-card" data-category="exams">
+              <div class="feature-top">
+                <div class="feature-icon amber">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                  >
+                    <rect x="4" y="4" width="16" height="16" rx="3" />
+                    <path d="M8 9h8M8 13h5M8 17h3" />
+                  </svg>
+                </div>
+                <span class="feature-badge amber">تحديث جديد</span>
+              </div>
+              <h3>تخصيص الصف والشعبة وتمييز البطاقات</h3>
+              <p>
+                استهدف جميع شعب الصف افتراضياً أو حدد شعبة معينة عند إنشاء
+                الاختبار، مع ألوان هادئة مميزة لبطاقة كل صف وإمكانية تعديل
+                الاختبار قبل تصحيحه.
+              </p>
+              <div class="feature-tags">
+                <span>شعبة محددة / الكل</span><span>تعديل قبل التصحيح</span>
+              </div>
+            </article>
+
+            <article class="feature-card" data-category="exams">
+              <div class="feature-top">
+                <div class="feature-icon blue">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                  >
+                    <path d="M7 3h7l5 5v13H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Z" />
+                    <path d="M14 3v6h5M8 14h8M8 17h5" />
+                  </svg>
+                </div>
+                <span class="feature-badge blue">نماذج OMR</span>
+              </div>
+              <h3>نماذج إجابة مرنة وإعادة ترتيب الأسئلة</h3>
+              <p>
+                دعم الاختيار من متعدد، الصح والخطأ، المزاوجة (٧ بدائل)،
+                والمقالي؛ مع إعادة ترتيب الأقسام وطباعة أوراق OMR برمز QR فريد
+                لكل طالب ومفتاح الإجابة.
+              </p>
+              <div class="feature-tags">
+                <span>رمز QR ذكي</span><span>مفتاح المعلم</span>
+              </div>
+            </article>
+
+            <article class="feature-card" data-category="exams">
+              <div class="feature-top">
+                <div class="feature-icon">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                  >
+                    <path
+                      d="M4 5a2 2 0 0 1 2-2h10l4 4v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5Z"
+                    />
+                    <path d="M9 12l2 2 4-4" />
+                  </svg>
+                </div>
+                <span class="feature-badge">دقة عالية</span>
+              </div>
+              <h3>تصحيح OMR آلي وكشف التظليل المزدوج</h3>
+              <p>
+                قراءة أوراق الإجابة من ملفات PDF أو الصور بدقة، اكتشاف الأوراق
+                الفارغة والتظليل المزدوج، مع شاشة مراجعة تفاعلية واضحة لتصحيح أي
+                فقرة فوراً.
+              </p>
+              <div class="feature-tags">
+                <span>PDF وصور</span><span>مراجعة يدوية</span>
+              </div>
+            </article>
+
+            <article class="feature-card" data-category="exams">
+              <div class="feature-top">
+                <div class="feature-icon amber">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                  >
+                    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                    <circle cx="9" cy="7" r="4" />
+                    <path d="M17 11l2 2 4-4" />
+                  </svg>
+                </div>
+                <span class="feature-badge amber">تحديث جديد</span>
+              </div>
+              <h3>مقارنة الأوراق وحصر الغياب أثناء التصحيح</h3>
+              <p>
+                يقارن النظام تلقائياً الأوراق المصححة بعدد طلاب الصف أو الشعبة،
+                ويعرض تنبيهاً فورياً مع قائمة الغائبين أو الأوراق المتبقية
+                وأرقام جلوسهم ولجانهم.
+              </p>
+              <div class="feature-tags">
+                <span>تنبيه اكتمال</span><span>قائمة المتبقين</span>
+              </div>
+            </article>
+
+            <article class="feature-card" data-category="reports">
+              <div class="feature-top">
+                <div class="feature-icon">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                  >
+                    <path d="M5 20V4m0 16h15M8 15l3-4 3 2 4-6" />
+                    <path d="M15 7h3v3" />
+                  </svg>
+                </div>
+                <span class="feature-badge">كشوف متكاملة</span>
+              </div>
+              <h3>كشوف درجات شاملة للكل ورصد الغائب (٠)</h3>
+              <p>
+                طباعة وتصدير كشوف النتائج لكامل طلاب الصف أو الشعبة المستهدفة في
+                PDF و Excel، مع رصد تلقائي لكل من لم تُمسح ورقته كـ «غائب (٠)»
+                وإحصائيات الحضور.
+              </p>
+              <div class="feature-tags">
+                <span>Excel و PDF</span><span>لصق في نور</span>
+              </div>
+            </article>
+
+            <article class="feature-card" data-category="reports">
+              <div class="feature-top">
+                <div class="feature-icon blue">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                  >
+                    <path
+                      d="M6.5 19a4.5 4.5 0 0 1-.4-8.98 6 6 0 0 1 11.7-1.6A4 4 0 0 1 18.5 19H6.5Z"
+                    />
+                    <path d="M12 12v5m0-5-2 2m2-2 2 2" />
+                  </svg>
+                </div>
+                <span class="feature-badge blue">تعاون الفريق</span>
+              </div>
+              <h3>مزامنة سحابية ذكية بين الأجهزة</h3>
+              <p>
+                تعاون مع فريق المدرسة عبر أجهزة متعددة؛ ارفع التعديلات واسحبها
+                بضغطة زر مع مؤشرات حالة لونية فورية، وكشف التعارضات قبل
+                الاستبدال.
+              </p>
+              <div class="feature-tags">
+                <span>مزامنة نصية سريعة</span><span>كشف تعارض</span>
+              </div>
+            </article>
+
+            <article class="feature-card" data-category="reports">
+              <div class="feature-top">
+                <div class="feature-icon navy">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                  >
+                    <path d="M21 8v13H3V8" />
+                    <path d="M1 3h22v5H1z" />
+                    <path d="M10 12h4" />
+                  </svg>
+                </div>
+                <span class="feature-badge">حفظ وأرشفة</span>
+              </div>
+              <h3>أرشيف متكامل وملفات نسخ احتياطي</h3>
+              <p>
+                أرشف الاختبارات المنتهية بسهولة، وصدّر أو استورد ملف أرشيف مضغوط
+                (<code>.examix</code>) يجمع قاعدة البيانات وصور أوراق الإجابة
+                لنقلها أو حفظها بأمان.
+              </p>
+              <div class="feature-tags">
+                <span>ملف examix.</span><span>أرشفة الاختبارات</span>
+              </div>
+            </article>
+
+            <article class="feature-card" data-category="reports">
+              <div class="feature-top">
+                <div class="feature-icon">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                  >
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z" />
+                    <path d="m9 12 2 2 4-4" />
+                  </svg>
+                </div>
+                <span class="feature-badge">أمان وموثوقية</span>
+              </div>
+              <h3>عمل دون اتصال وحفظ مستقر للترخيص</h3>
+              <p>
+                تعمل جميع مهام التوزيع والطباعة والتصحيح محلياً بسرعة عالية دون
+                اشتراط اتصال مستمر، مع تفعيل بكود الترخيص وحفظ مشفّر وآمن على
+                الجهاز.
+              </p>
+              <div class="feature-tags">
+                <span>Offline-First</span><span>حفظ آمن</span>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section soft" id="من-داخل-إكزامكس">
+        <div class="container">
+          <div class="section-heading">
+            <span class="kicker">لقطات من التطبيق</span>
+            <h2>شاهد كيف تصبح إدارة الاختبارات أسهل</h2>
+            <p>
+              اضغط على أي شاشة لتكبيرها واستعراض تجربة العمل المتكاملة داخل
+              إكزامكس.
+            </p>
+          </div>
+          <div class="screens-grid">
+            <button
+              class="screen-card"
+              type="button"
+              data-src="assets/screenshots/dashboard.png"
+              data-title="لوحة إدارة الاختبارات"
+              data-desc="نظرة سريعة على المراحل الدراسية والطلاب واللجان والاختبارات."
+            >
+              <img
+                class="screen-image"
+                src="assets/screenshots/dashboard.png"
+                alt="لوحة المراحل الدراسية واللجان والاختبارات في إكزامكس"
+                loading="lazy"
+              />
+              <div class="screen-caption">
+                <strong>لوحة إدارة الاختبارات</strong
+                ><span>نظرة سريعة على الطلاب واللجان والاختبارات.</span>
+              </div>
+            </button>
+            <button
+              class="screen-card"
+              type="button"
+              data-src="assets/screenshots/committees.png"
+              data-title="اللجان والتحقق من التوزيع"
+              data-desc="تابع المقاعد والطلاب غير المسكّنين قبل اعتماد التوزيع."
+            >
+              <img
+                class="screen-image"
+                src="assets/screenshots/committees.png"
+                alt="قائمة اللجان ومؤشر التحقق من توزيع الطلاب"
+                loading="lazy"
+              />
+              <div class="screen-caption">
+                <strong>اللجان والتحقق من التوزيع</strong
+                ><span
+                  >تابع المقاعد والطلاب غير المسكّنين قبل اعتماد التوزيع.</span
+                >
+              </div>
+            </button>
+            <button
+              class="screen-card"
+              type="button"
+              data-src="assets/screenshots/distribution.png"
+              data-title="توزيع يدوي حسب الصفوف"
+              data-desc="خصص أعداد الطلاب لكل صف داخل اللجنة بما يناسب سعتها."
+            >
+              <img
+                class="screen-image"
+                src="assets/screenshots/distribution.png"
+                alt="جدول التوزيع اليدوي لأعداد الطلاب من كل صف في اللجان"
+                loading="lazy"
+              />
+              <div class="screen-caption">
+                <strong>توزيع يدوي حسب الصفوف</strong
+                ><span
+                  >خصص أعداد الطلاب لكل صف داخل اللجنة بما يناسب سعتها.</span
+                >
+              </div>
+            </button>
+            <button
+              class="screen-card"
+              type="button"
+              data-src="assets/screenshots/printing.png"
+              data-title="مستندات وملصقات اللجان"
+              data-desc="جهّز كشوف الاستلام وملصقات الطاولات والأبواب للطباعة."
+            >
+              <img
+                class="screen-image"
+                src="assets/screenshots/printing.png"
+                alt="خيارات طباعة كشوف استلام الطلاب وملصقات الطاولات والأبواب"
+                loading="lazy"
+              />
+              <div class="screen-caption">
+                <strong>مستندات وملصقات اللجان</strong
+                ><span
+                  >جهّز كشوف الاستلام وملصقات الطاولات والأبواب للطباعة.</span
+                >
+              </div>
+            </button>
+            <button
+              class="screen-card"
+              type="button"
+              data-src="assets/screenshots/exams.png"
+              data-title="إدارة الاختبارات ونماذج الإجابة"
+              data-desc="بطاقات مميزة بألوان الصفوف والشعب، تعديل قبل التصحيح، وطباعة OMR."
+            >
+              <img
+                class="screen-image"
+                src="assets/screenshots/exams.png"
+                alt="إدارة الاختبارات ونماذج الإجابة في إكزامكس"
+                loading="lazy"
+              />
+              <div class="screen-caption">
+                <strong>إدارة الاختبارات ونماذج الإجابة</strong
+                ><span
+                  >بطاقات ملونة حسب الصف، تعديل قبل التصحيح، وأرشفة منظمة.</span
+                >
+              </div>
+            </button>
+            <button
+              class="screen-card"
+              type="button"
+              data-src="assets/screenshots/answer-key-structure.png"
+              data-title="بنية نموذج الإجابة"
+              data-desc="حدد أنواع الأسئلة وترتيبها وأعدادها ودرجاتها لتجهيز نموذج التصحيح."
+            >
+              <img
+                class="screen-image"
+                src="assets/screenshots/answer-key-structure.png"
+                alt="إعداد بنية نموذج الإجابة وتحديد أنواع الأسئلة وأعدادها ودرجاتها"
+                loading="lazy"
+              />
+              <div class="screen-caption">
+                <strong>بنية نموذج الإجابة</strong
+                ><span
+                  >حدد أنواع الأسئلة وأعدادها ودرجاتها لتجهيز نموذج
+                  التصحيح.</span
+                >
+              </div>
+            </button>
+            <button
+              class="screen-card"
+              type="button"
+              data-src="assets/screenshots/correction-results.png"
+              data-title="متابعة التصحيح وحصر الغياب"
+              data-desc="تابع حالة الأوراق المصححة وقارنها بطلاب الصف مع تنبيه الغائبين."
+            >
+              <img
+                class="screen-image"
+                src="assets/screenshots/correction-results.png"
+                alt="متابعة أوراق الإجابة وحالات التصحيح ومراجعة الأخطاء"
+                loading="lazy"
+              />
+              <div class="screen-caption">
+                <strong>متابعة التصحيح ومراجعة النتائج</strong
+                ><span
+                  >تابع حالة الأوراق، واحصر الغائبين وراجع الأخطاء قبل
+                  الاعتماد.</span
+                >
+              </div>
+            </button>
+            <button
+              class="screen-card"
+              type="button"
+              data-src="assets/screenshots/review.png"
+              data-title="مراجعة أوراق الإجابة"
+              data-desc="راجع الإجابات المقروءة، واكتشف التظليل المزدوج أو الأخطاء وعدّلها بسهولة."
+            >
+              <img
+                class="screen-image"
+                src="assets/screenshots/review.png"
+                alt="مراجعة ورقة الإجابة ونتيجة التصحيح في إكزامكس"
+                loading="lazy"
+              />
+              <div class="screen-caption">
+                <strong>مراجعة أوراق الإجابة</strong
+                ><span
+                  >راجع الإجابات المقروءة، اكتشف التظليل المزدوج وعدّلها
+                  بسهولة.</span
+                >
+              </div>
+            </button>
+            <button
+              class="screen-card"
+              type="button"
+              data-src="assets/screenshots/reports.png"
+              data-title="تقارير الاختبارات والنتائج"
+              data-desc="كشوف درجات لكامل الصف مع رصد الغائب (0)، وإحصائيات وتصدير Excel وPDF."
+            >
+              <img
+                class="screen-image"
+                src="assets/screenshots/reports.png"
+                alt="تقارير الاختبارات وإحصائيات النتائج مع خيارات تصدير Excel وPDF"
+                loading="lazy"
+              />
+              <div class="screen-caption">
+                <strong>تقارير الاختبارات والنتائج</strong
+                ><span
+                  >كشف شامل لكامل الصف، رصد الغائب (٠)، وتصدير Excel و
+                  PDF.</span
+                >
+              </div>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="الخطوات">
+        <div class="container workflow">
+          <div class="workflow-copy">
+            <div class="section-heading">
+              <span class="kicker">توزيع يناسب طريقتك</span>
+              <h2>تحكم كامل في تسكين الطلاب</h2>
+              <p>
+                اختر أسلوب التوزيع الذي يناسب لجانك، ثم تحقّق من اكتمال التسكين
+                قبل الطباعة.
+              </p>
+            </div>
+            <div class="steps">
+              <div class="step">
+                <span class="step-no">١</span>
+                <div>
+                  <strong>حسب فصولهم — في أماكنهم</strong>
+                  <p>
+                    حافظ على جلوس الطلاب في فصولهم الحالية مع ترقيم جلوس منظم.
+                  </p>
+                </div>
+              </div>
+              <div class="step">
+                <span class="step-no">٢</span>
+                <div>
+                  <strong>توزيع تسلسلي حسب الصف والشعبة</strong>
+                  <p>
+                    رتّب الطلاب بالتتابع وفق صفوفهم وشعبهم على اللجان المتاحة.
+                  </p>
+                </div>
+              </div>
+              <div class="step">
+                <span class="step-no">٣</span>
+                <div>
+                  <strong>توزيع متوازن بين الصفوف</strong>
+                  <p>
+                    وزّع طلاب الصفوف المختلفة بالتوازن التام على اللجان لمنع
+                    التكدس.
+                  </p>
+                </div>
+              </div>
+              <div class="step">
+                <span class="step-no">٤</span>
+                <div>
+                  <strong>تخصيص يدوي أو حسب الأعمدة</strong>
+                  <p>
+                    حدد عدد طلاب كل صف في اللجنة، أو اختر عدد الأعمدة وصفّين أو
+                    أكثر في العمود.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="workflow-panel"
+            aria-label="معاينة لمؤشر اكتمال توزيع الصفوف"
+          >
+            <div class="panel-top">
+              <span>ملخص توزيع اللجان والتحقق</span
+              ><span class="live">● التحقق مكتمل ١٠٠٪</span>
+            </div>
+            <div class="class-bars">
+              <div class="class-row">
+                <span>الصف الأول</span>
+                <div class="bar"><i style="width: 100%"></i></div>
+                <b>١٠٠٪</b>
+              </div>
+              <div class="class-row">
+                <span>الصف الثاني</span>
+                <div class="bar"><i style="width: 100%"></i></div>
+                <b>١٠٠٪</b>
+              </div>
+              <div class="class-row">
+                <span>الصف الثالث</span>
+                <div class="bar"><i style="width: 100%"></i></div>
+                <b>١٠٠٪</b>
+              </div>
+              <div class="class-row">
+                <span>اكتمال التصحيح</span>
+                <div class="bar"><i style="width: 94%"></i></div>
+                <b>٩٤٪</b>
+              </div>
+            </div>
+            <div class="panel-note">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="m5 12 4 4L19 6" />
+              </svg>
+              تمت مراجعة التوزيع والتصحيح — جميع الطلاب مسكّنون وتم حصر الغياب
+              تلقائياً
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section soft">
+        <div class="container">
+          <div class="section-heading">
+            <span class="kicker">وقت أقل. دقة أعلى.</span>
+            <h2>كل خطوة أسهل مع إكزامكس</h2>
+            <p>
+              صُممت المزايا لتساعد فريق المدرسة على إنجاز موسم الاختبارات بسلاسة
+              وموثوقية كاملة.
+            </p>
+          </div>
+          <div class="benefit-row">
+            <div class="benefit">
+              <span class="benefit-icon"
+                ><svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                >
+                  <circle cx="12" cy="12" r="9" />
+                  <path d="M12 7v5l3 2" /></svg
+              ></span>
+              <h3>إنجاز أسرع</h3>
+              <p>اختصر ساعات العمل اليدوي في التوزيع والطباعة ورصد الدرجات.</p>
+            </div>
+            <div class="benefit">
+              <span class="benefit-icon"
+                ><svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                >
+                  <path
+                    d="M12 3 4 6v5c0 5 3.4 8.5 8 10 4.6-1.5 8-5 8-10V6l-8-3Z"
+                  />
+                  <path d="m9 12 2 2 4-4" /></svg
+              ></span>
+              <h3>دقة واطمئنان</h3>
+              <p>
+                تحقق من التسكين، راجع أخطاء التظليل، وتأكد من عدم سقوط أي طالب
+                غائب.
+              </p>
+            </div>
+            <div class="benefit">
+              <span class="benefit-icon"
+                ><svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                >
+                  <path d="M4 4h16v16H4z" />
+                  <path d="M8 8h8M8 12h8M8 16h4" /></svg
+              ></span>
+              <h3>تنظيم متكامل</h3>
+              <p>
+                المراحل، الطلاب، النماذج، الصور، والدرجات في أرشيف واحد منظم.
+              </p>
+            </div>
+            <div class="benefit">
+              <span class="benefit-icon"
+                ><svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                >
+                  <path
+                    d="M4 12a8 8 0 0 1 16 0v5a2 2 0 0 1-2 2h-2v-6h4M4 13h4v6H6a2 2 0 0 1-2-2v-4Z"
+                  /></svg
+              ></span>
+              <h3>دعم قريب منك</h3>
+              <p>فريق إكزامكس جاهز لمساعدتك وتدريب فريق المدرسة عبر واتساب.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="الأسئلة-الشائعة">
+        <div class="container">
+          <div class="section-heading">
+            <span class="kicker">إجابات سريعة</span>
+            <h2>الأسئلة الشائعة</h2>
+            <p>
+              أكثر الاستفسارات شيوعاً حول التشغيل، التصحيح الآلي، نظام نور،
+              والمزامنة.
+            </p>
+          </div>
+          <div class="faq-list">
+            <details class="faq-item" open>
+              <summary class="faq-q">
+                هل يحتاج التصحيح الآلي جهاز OMR خاصاً أم تكفي الطابعة والماسح
+                العادي؟
+              </summary>
+              <div class="faq-a">
+                لا يحتاج أي أجهزة OMR باهظة الثمن؛ يمكنك طباعة نماذج الإجابة على
+                أي طابعة مكتبية عادية، ثم مسح الأوراق بأي ماسح ضوئي (Scanner) أو
+                استيرادها كملف PDF متعدد الصفحات أو صور مباشرة داخل إكزامكس.
+              </div>
+            </details>
+            <details class="faq-item">
+              <summary class="faq-q">
+                ما هي الإعدادات الموصى بها للماسح الضوئي (صور JPG أو ملفات PDF)؟
+              </summary>
+              <div class="faq-a">
+                <strong
+                  >الإعدادات الموصى بها عند المسح بصيغة صور (JPG /
+                  JPEG):</strong
+                >
+                <ul>
+                  <li><strong>الصيغة:</strong> JPG / JPEG</li>
+                  <li><strong>الدقة:</strong> 200 dpi</li>
+                  <li>
+                    <strong>اللون:</strong> رمادي / تدرج رمادي (Grayscale)
+                  </li>
+                  <li>
+                    <strong>حجم الورق:</strong> A4 أو كشف تلقائي، مع وضع ورقة
+                    نموذج الإجابة (MASTER_KEY) أول ورقة في المجلد أو الترتيب.
+                  </li>
+                </ul>
+                <strong>الإعدادات الموصى بها عند الحفظ بصيغة PDF:</strong>
+                <ul>
+                  <li>
+                    <strong>الصيغة:</strong> PDF (متعدد الصفحات — ملف واحد يضم
+                    جميع الأوراق).
+                  </li>
+                  <li><strong>الدقة:</strong> 150 إلى 200 dpi</li>
+                  <li>
+                    <strong>اللون:</strong> رمادي / تدرج رمادي (Grayscale)
+                  </li>
+                  <li><strong>حجم الورق:</strong> A4 أو كشف تلقائي</li>
+                  <li>
+                    <strong>المصدر:</strong> وحدة التغذية التلقائية بالمستندات –
+                    على وجه واحد
+                  </li>
+                  <li>
+                    <strong>الترتيب:</strong> وضع ورقة نموذج الإجابة
+                    (MASTER_KEY) كأول صفحة في الملف، وفي حال المسح على الوجهين
+                    يُنصح بتفعيل خيار تخطي الصفحات البيضاء داخل شاشة التصحيح.
+                  </li>
+                  <li>
+                    <strong>الضغط وOCR (إن وُجدت في برنامج الماسح):</strong>
+                    استخدام ضغط عادي/متوازن وتجنب خيار «الضغط الفائق / High
+                    Compression»، وكذلك إيقاف OCR (التعرف الضوئي على النصوص)
+                    لتسريع عملية المسح من الماسح.
+                  </li>
+                </ul>
+              </div>
+            </details>
+            <details class="faq-item">
+              <summary class="faq-q">
+                هل يعمل البرنامج بدون اتصال بالإنترنت؟
+              </summary>
+              <div class="faq-a">
+                نعم، يعمل البرنامج محلياً بالكامل لإدارة الطلاب، توزيع اللجان،
+                طباعة الكشوف ونماذج OMR، والتصحيح الآلي وإصدار التقارير بسرعة
+                عالية دون اشتراط اتصال دائم. يلزم الإنترنت فقط عند التفعيل الأول
+                أو عند استخدام المزامنة السحابية بين الأجهزة.
+              </div>
+            </details>
+            <details class="faq-item">
+              <summary class="faq-q">
+                كيف أستورد بيانات الطلاب من نظام نور وكيف أنقل الدرجات إليه؟
+              </summary>
+              <div class="faq-a">
+                من نظام نور اختر «تقارير ← الطلاب ← كشف الطلاب» وصدّره بصيغة
+                Excel ثم استورده مباشرة في المرحلة الدراسية داخل إكزامكس. وبعد
+                انتهاء التصحيح يمكنك تصدير الدرجات إلى Excel أو PDF أو نسخها
+                ولصقها مباشرة في نظام نور عبر إضافة إكزامكس.
+              </div>
+            </details>
+            <details class="faq-item">
+              <summary class="faq-q">
+                ماذا يحدث عند التظليل المزدوج أو ترك سؤال فارغ أو غياب الطالب؟
+              </summary>
+              <div class="faq-a">
+                يكتشف النظام التظليل المزدوج (في الاختيار من متعدد أو الصح
+                والخطأ أو المزاوجة) وكذلك الأسئلة الفارغة ويعرضها في شاشة مراجعة
+                واضحة لتعديلها بنقرة واحدة. كما يقارن عدد الأوراق المصححة بعدد
+                طلاب الصف/الشعبة لعرض تنبيه بالغائبين، ويرصدهم تلقائياً في كشف
+                الدرجات بـ «غائب (٠)».
+              </div>
+            </details>
+            <details class="faq-item">
+              <summary class="faq-q">
+                هل يمكن تحديد شعبة معينة عند إنشاء الاختبار أو تعديله بعد الحفظ؟
+              </summary>
+              <div class="faq-a">
+                نعم؛ عند إنشاء الاختبار يتم اختيار جميع شعب الصف افتراضياً، مع
+                إمكانية تحديد شعبة معينة أو أكثر بحيث تقتصر الطباعة ومقارنة
+                الغياب والكشوف على طلابها فقط. كما يمكنك تعديل بيانات الاختبار
+                وتوزيع أسئلته بالكامل طالما لم يبدأ تصحيح أوراق الطلاب بعد.
+              </div>
+            </details>
+            <details class="faq-item">
+              <summary class="faq-q">
+                هل يمكن التعاون على أكثر من جهاز في نفس المدرسة؟
+              </summary>
+              <div class="faq-a">
+                نعم، يوفّر إكزامكس ميزة المزامنة السحابية الذكية للتعاون بين
+                أعضاء لجنة الاختبارات (جهاز للتوزيع والطباعة وآخر للتصحيح) مع
+                كشف التعارضات، بالإضافة إلى إمكانية تصدير واستيراد أرشيف
+                <code>.examix</code> الكامل الذي يحفظ قاعدة البيانات وصور أوراق
+                الإجابة معاً.
+              </div>
+            </details>
+          </div>
+        </div>
+      </section>
+
+      <section class="section soft" id="التحميلات">
+        <div class="container">
+          <div class="section-heading">
+            <span class="kicker">ابدأ الاستخدام الآن</span>
+            <h2>تحميلات إكزامكس</h2>
+            <p>
+              حمّل تطبيق إكزامكس لنظام ويندوز و أضف إضافة إكزامكس إلى متصفح
+              Chrome.
+            </p>
+          </div>
+          <div class="downloads-grid">
+            <a
+              class="download-card"
+              href="https://apps.microsoft.com/detail/9nvdcgbkhtc5?hl=ar-SA&amp;gl=SA"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="فتح تطبيق إكزامكس في متجر Microsoft"
+            >
+              <span class="download-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M3 3h8v8H3V3Zm10 0h8v8h-8V3ZM3 13h8v8H3v-8Zm10 0h8v8h-8v-8Z"
+                  />
+                </svg>
+              </span>
+              <span class="download-copy">
+                <strong>تطبيق إكزامكس لويندوز</strong>
+                <span>احصل على التطبيق من متجر Microsoft.</span>
+                <span class="download-link">فتح متجر Microsoft ←</span>
+              </span>
+            </a>
+            <a
+              class="download-card"
+              href="https://chromewebstore.google.com/detail/cdhoigggallnnepgjboaapibpdphgcbe"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="تحميل إضافة إكزامكس من متجر Chrome"
+            >
+              <span class="download-icon extension" aria-hidden="true">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                >
+                  <circle cx="12" cy="12" r="9" />
+                  <circle cx="12" cy="12" r="3" />
+                  <path
+                    d="M12 3h7l-3.5 6H12V3ZM5 5.5l3.5 6-3.5 6H2l3.5-6L5 5.5Zm7 9.5h7l-3.5 6H12v-6Z"
+                  />
+                </svg>
+              </span>
+              <span class="download-copy">
+                <strong>إضافة إكزامكس للمتصفح</strong>
+                <span
+                  >أضف الإضافة إلى Chrome ونقل الدرجات إلى نظام نور
+                  بسهولة.</span
+                >
+                <span class="download-link">تحميل الإضافة ←</span>
+              </span>
             </a>
           </div>
-          <div class="trust-row"><span class="trust-check">✓</span> يعمل محلياً دون اتصال دائم بالإنترنت مع حفظ آمن للبيانات والترخيص</div>
-        </div>
-
-        <div class="dashboard" aria-label="معاينة توضيحية لتوزيع الطلاب على اللجان">
-          <div class="glow"></div>
-          <div class="mockup">
-            <div class="mock-head">
-              <div><div class="mock-title">لوحة الاختبارات والتصحيح</div><span class="mock-label">الاختبارات النهائية · متابعة حية</span></div>
-              <span class="mock-dots">•••</span>
+          <div class="trial-box" aria-label="كود التجربة">
+            <div class="trial-copy">
+              <strong>جرّب إكزامكس قبل الاشتراك</strong>
+              <span>استخدم كود التجربة عند تفعيل التطبيق.</span>
             </div>
-            <div class="mock-stats">
-              <div class="stat"><strong>٣٦٨</strong><span>طالب وطالبة</span></div>
-              <div class="stat"><strong>١٢</strong><span>لجنة اختبار</span></div>
-              <div class="stat"><strong class="green">١٠٠٪</strong><span>نسبة التسكين</span></div>
-            </div>
-            <div class="seating">
-              <div class="seating-head"><span>توزيع المقاعد · اللجنة ٠١</span><span>٣٢ / ٣٢</span></div>
-              <div class="seat-grid">
-                <i class="seat"></i><i class="seat"></i><i class="seat"></i><i class="seat"></i><i class="seat"></i><i class="seat"></i>
-                <i class="seat"></i><i class="seat"></i><i class="seat"></i><i class="seat"></i><i class="seat"></i><i class="seat"></i>
-                <i class="seat"></i><i class="seat"></i><i class="seat"></i><i class="seat"></i><i class="seat"></i><i class="seat"></i>
-                <i class="seat"></i><i class="seat"></i><i class="seat"></i><i class="seat"></i><i class="seat"></i><i class="seat"></i>
-              </div>
-              <div class="mock-foot"><span>مقاعد موزعة حسب الصف والشعبة</span><span>✓ مكتمل</span></div>
+            <div class="trial-code">
+              <code id="trial-code">770de969-c112-43e5-9c38-7cc2ce8e00b6</code>
+              <button class="button copy-code" id="copy-trial-code" type="button">نسخ الكود</button>
             </div>
           </div>
-          <div class="floating-card top"><span class="float-icon">✓</span><span><strong>اكتمل التوزيع</strong><small>محرك تحقق قبل الطباعة</small></span></div>
-          <div class="floating-card bottom"><span class="float-icon">✳</span><span><strong>تصحيح ومقارنة الغياب</strong><small>رصد تلقائي لـ (غائب / 0)</small></span></div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <section class="section" id="المزايا">
-      <div class="container">
-        <div class="section-heading">
-          <span class="kicker">مزايا شاملة ومحدثة</span>
-          <h2>رحلة اختبار متكاملة<br>من البداية إلى النتيجة</h2>
-          <p>أدوات عملية مترابطة تغطي إدارة المراحل، توزيع اللجان، طباعة وتصحيح OMR، متابعة الغياب، والتقارير والمزامنة السحابية.</p>
-        </div>
-
-        <div class="filter-tabs" role="tablist" aria-label="تصنيف المزايا">
-          <button class="filter-btn active" type="button" data-filter="all">جميع المزايا (١٢)</button>
-          <button class="filter-btn" type="button" data-filter="committees">الطلاب واللجان</button>
-          <button class="filter-btn" type="button" data-filter="exams">الاختبارات والتصحيح</button>
-          <button class="filter-btn" type="button" data-filter="reports">التقارير والمزامنة</button>
-        </div>
-
-        <div class="features-grid">
-          <article class="feature-card" data-category="committees">
-            <div class="feature-top">
-              <div class="feature-icon navy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v16H6.5A2.5 2.5 0 0 0 4 21V5.5Z"/><path d="M4 17a2.5 2.5 0 0 1 2.5-2.5H20M8 7h8M8 10h6"/></svg></div>
-              <span class="feature-badge">عزل كامل</span>
-            </div>
-            <h3>إدارة مراحل دراسية متعددة</h3>
-            <p>أنشئ مراحل دراسية مستقلة (ابتدائي، متوسط، ثانوي...) بحيث تمتلك كل مرحلة قاعدة طلابها ولجانها واختباراتها بشكل منظم ومنفصل.</p>
-            <div class="feature-tags"><span>تعدد المراحل</span><span>تبديل فوري</span></div>
-          </article>
-
-          <article class="feature-card" data-category="committees">
-            <div class="feature-top">
-              <div class="feature-icon blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 16V4m0 0L8 8m4-4 4 4"/><path d="M5 13v5a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-5"/></svg></div>
-              <span class="feature-badge blue">نظام نور</span>
-            </div>
-            <h3>استيراد ذكي من نظام نور</h3>
-            <p>استورد كشوف الطلاب من Excel مباشرة عبر «تقارير ← الطلاب ← كشف الطلاب» مع تعرف تلقائي على الأسماء والهويات والصفوف والشعب.</p>
-            <div class="feature-tags"><span>ملفات Excel</span><span>فرز تلقائي</span></div>
-          </article>
-
-          <article class="feature-card" data-category="committees">
-            <div class="feature-top">
-              <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M8 8h3v3H8zM14 8h3M14 11h3M8 14h3M14 14h3M8 17h9"/></svg></div>
-              <span class="feature-badge">٤ استراتيجيات</span>
-            </div>
-            <h3>لجان وتسكين مرن ومحرك تحقق</h3>
-            <p>وزّع الطلاب بمرونة (في فصولهم، تسلسلي، متوازن، مخصص بالحصص أو الأعمدة) مع منع تكرار أسماء اللجان ومحرك تحقق يكشف أي نقص قبل الطباعة.</p>
-            <div class="feature-tags"><span>توزيع الأعمدة</span><span>أرقام جلوس</span></div>
-          </article>
-
-          <article class="feature-card" data-category="committees">
-            <div class="feature-top">
-              <div class="feature-icon navy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 3h9l4 4v14H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Z"/><path d="M14 3v5h5M8 13h8M8 17h8"/></svg></div>
-              <span class="feature-badge">طباعة فورية</span>
-            </div>
-            <h3>كشوف الاستلام وملصقات اللجان</h3>
-            <p>أصدر كشوف التوقيع والاستلام، وملصقات الطاولات وأبواب اللجان جاهزة للطباعة بصيغة PDF مع نافذة معاينة تفاعلية وتكبير وتمرير سلس.</p>
-            <div class="feature-tags"><span>كشوف مناداة</span><span>ملصقات طاولات</span></div>
-          </article>
-
-          <article class="feature-card" data-category="exams">
-            <div class="feature-top">
-              <div class="feature-icon amber"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M8 9h8M8 13h5M8 17h3"/></svg></div>
-              <span class="feature-badge amber">تحديث جديد</span>
-            </div>
-            <h3>تخصيص الصف والشعبة وتمييز البطاقات</h3>
-            <p>استهدف جميع شعب الصف افتراضياً أو حدد شعبة معينة عند إنشاء الاختبار، مع ألوان هادئة مميزة لبطاقة كل صف وإمكانية تعديل الاختبار قبل تصحيحه.</p>
-            <div class="feature-tags"><span>شعبة محددة / الكل</span><span>تعديل قبل التصحيح</span></div>
-          </article>
-
-          <article class="feature-card" data-category="exams">
-            <div class="feature-top">
-              <div class="feature-icon blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 3h7l5 5v13H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Z"/><path d="M14 3v6h5M8 14h8M8 17h5"/></svg></div>
-              <span class="feature-badge blue">نماذج OMR</span>
-            </div>
-            <h3>نماذج إجابة مرنة وإعادة ترتيب الأسئلة</h3>
-            <p>دعم الاختيار من متعدد، الصح والخطأ، المزاوجة (٧ بدائل)، والمقالي؛ مع إعادة ترتيب الأقسام وطباعة أوراق OMR برمز QR فريد لكل طالب ومفتاح الإجابة.</p>
-            <div class="feature-tags"><span>رمز QR ذكي</span><span>مفتاح المعلم</span></div>
-          </article>
-
-          <article class="feature-card" data-category="exams">
-            <div class="feature-top">
-              <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 5a2 2 0 0 1 2-2h10l4 4v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5Z"/><path d="M9 12l2 2 4-4"/></svg></div>
-              <span class="feature-badge">دقة عالية</span>
-            </div>
-            <h3>تصحيح OMR آلي وكشف التظليل المزدوج</h3>
-            <p>قراءة أوراق الإجابة من ملفات PDF أو الصور بدقة، اكتشاف الأوراق الفارغة والتظليل المزدوج، مع شاشة مراجعة تفاعلية واضحة لتصحيح أي فقرة فوراً.</p>
-            <div class="feature-tags"><span>PDF وصور</span><span>مراجعة يدوية</span></div>
-          </article>
-
-          <article class="feature-card" data-category="exams">
-            <div class="feature-top">
-              <div class="feature-icon amber"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M17 11l2 2 4-4"/></svg></div>
-              <span class="feature-badge amber">تحديث جديد</span>
-            </div>
-            <h3>مقارنة الأوراق وحصر الغياب أثناء التصحيح</h3>
-            <p>يقارن النظام تلقائياً الأوراق المصححة بعدد طلاب الصف أو الشعبة، ويعرض تنبيهاً فورياً مع قائمة الغائبين أو الأوراق المتبقية وأرقام جلوسهم ولجانهم.</p>
-            <div class="feature-tags"><span>تنبيه اكتمال</span><span>قائمة المتبقين</span></div>
-          </article>
-
-          <article class="feature-card" data-category="reports">
-            <div class="feature-top">
-              <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 20V4m0 16h15M8 15l3-4 3 2 4-6"/><path d="M15 7h3v3"/></svg></div>
-              <span class="feature-badge">كشوف متكاملة</span>
-            </div>
-            <h3>كشوف درجات شاملة للكل ورصد الغائب (٠)</h3>
-            <p>طباعة وتصدير كشوف النتائج لكامل طلاب الصف أو الشعبة المستهدفة في PDF و Excel، مع رصد تلقائي لكل من لم تُمسح ورقته كـ «غائب (٠)» وإحصائيات الحضور.</p>
-            <div class="feature-tags"><span>Excel و PDF</span><span>لصق في نور</span></div>
-          </article>
-
-          <article class="feature-card" data-category="reports">
-            <div class="feature-top">
-              <div class="feature-icon blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6.5 19a4.5 4.5 0 0 1-.4-8.98 6 6 0 0 1 11.7-1.6A4 4 0 0 1 18.5 19H6.5Z"/><path d="M12 12v5m0-5-2 2m2-2 2 2"/></svg></div>
-              <span class="feature-badge blue">تعاون الفريق</span>
-            </div>
-            <h3>مزامنة سحابية ذكية بين الأجهزة</h3>
-            <p>تعاون مع فريق المدرسة عبر أجهزة متعددة؛ ارفع التعديلات واسحبها بضغطة زر مع مؤشرات حالة لونية فورية، وكشف التعارضات قبل الاستبدال.</p>
-            <div class="feature-tags"><span>مزامنة نصية سريعة</span><span>كشف تعارض</span></div>
-          </article>
-
-          <article class="feature-card" data-category="reports">
-            <div class="feature-top">
-              <div class="feature-icon navy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 8v13H3V8"/><path d="M1 3h22v5H1z"/><path d="M10 12h4"/></svg></div>
-              <span class="feature-badge">حفظ وأرشفة</span>
-            </div>
-            <h3>أرشيف متكامل وملفات نسخ احتياطي</h3>
-            <p>أرشف الاختبارات المنتهية بسهولة، وصدّر أو استورد ملف أرشيف مضغوط (<code>.examix</code>) يجمع قاعدة البيانات وصور أوراق الإجابة لنقلها أو حفظها بأمان.</p>
-            <div class="feature-tags"><span>ملف examix.</span><span>أرشفة الاختبارات</span></div>
-          </article>
-
-          <article class="feature-card" data-category="reports">
-            <div class="feature-top">
-              <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/><path d="m9 12 2 2 4-4"/></svg></div>
-              <span class="feature-badge">أمان وموثوقية</span>
-            </div>
-            <h3>عمل دون اتصال وحفظ مستقر للترخيص</h3>
-            <p>تعمل جميع مهام التوزيع والطباعة والتصحيح محلياً بسرعة عالية دون اشتراط اتصال مستمر، مع تفعيل بكود الترخيص وحفظ مشفّر وآمن على الجهاز.</p>
-            <div class="feature-tags"><span>Offline-First</span><span>حفظ آمن</span></div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section soft" id="من-داخل-إكزامكس">
-      <div class="container">
-        <div class="section-heading">
-          <span class="kicker">لقطات من التطبيق</span>
-          <h2>شاهد كيف تصبح إدارة الاختبارات أسهل</h2>
-          <p>اضغط على أي شاشة لتكبيرها واستعراض تجربة العمل المتكاملة داخل إكزامكس.</p>
-        </div>
-        <div class="screens-grid">
-          <button class="screen-card" type="button" data-src="assets/screenshots/dashboard.png" data-title="لوحة إدارة الاختبارات" data-desc="نظرة سريعة على المراحل الدراسية والطلاب واللجان والاختبارات.">
-            <img class="screen-image" src="assets/screenshots/dashboard.png" alt="لوحة المراحل الدراسية واللجان والاختبارات في إكزامكس" loading="lazy">
-            <div class="screen-caption"><strong>لوحة إدارة الاختبارات</strong><span>نظرة سريعة على الطلاب واللجان والاختبارات.</span></div>
-          </button>
-          <button class="screen-card" type="button" data-src="assets/screenshots/committees.png" data-title="اللجان والتحقق من التوزيع" data-desc="تابع المقاعد والطلاب غير المسكّنين قبل اعتماد التوزيع.">
-            <img class="screen-image" src="assets/screenshots/committees.png" alt="قائمة اللجان ومؤشر التحقق من توزيع الطلاب" loading="lazy">
-            <div class="screen-caption"><strong>اللجان والتحقق من التوزيع</strong><span>تابع المقاعد والطلاب غير المسكّنين قبل اعتماد التوزيع.</span></div>
-          </button>
-          <button class="screen-card" type="button" data-src="assets/screenshots/distribution.png" data-title="توزيع يدوي حسب الصفوف" data-desc="خصص أعداد الطلاب لكل صف داخل اللجنة بما يناسب سعتها.">
-            <img class="screen-image" src="assets/screenshots/distribution.png" alt="جدول التوزيع اليدوي لأعداد الطلاب من كل صف في اللجان" loading="lazy">
-            <div class="screen-caption"><strong>توزيع يدوي حسب الصفوف</strong><span>خصص أعداد الطلاب لكل صف داخل اللجنة بما يناسب سعتها.</span></div>
-          </button>
-          <button class="screen-card" type="button" data-src="assets/screenshots/printing.png" data-title="مستندات وملصقات اللجان" data-desc="جهّز كشوف الاستلام وملصقات الطاولات والأبواب للطباعة.">
-            <img class="screen-image" src="assets/screenshots/printing.png" alt="خيارات طباعة كشوف استلام الطلاب وملصقات الطاولات والأبواب" loading="lazy">
-            <div class="screen-caption"><strong>مستندات وملصقات اللجان</strong><span>جهّز كشوف الاستلام وملصقات الطاولات والأبواب للطباعة.</span></div>
-          </button>
-          <button class="screen-card" type="button" data-src="assets/screenshots/exams.png" data-title="إدارة الاختبارات ونماذج الإجابة" data-desc="بطاقات مميزة بألوان الصفوف والشعب، تعديل قبل التصحيح، وطباعة OMR.">
-            <img class="screen-image" src="assets/screenshots/exams.png" alt="إدارة الاختبارات ونماذج الإجابة في إكزامكس" loading="lazy">
-            <div class="screen-caption"><strong>إدارة الاختبارات ونماذج الإجابة</strong><span>بطاقات ملونة حسب الصف، تعديل قبل التصحيح، وأرشفة منظمة.</span></div>
-          </button>
-          <button class="screen-card" type="button" data-src="assets/screenshots/answer-key-structure.png" data-title="بنية نموذج الإجابة" data-desc="حدد أنواع الأسئلة وترتيبها وأعدادها ودرجاتها لتجهيز نموذج التصحيح.">
-            <img class="screen-image" src="assets/screenshots/answer-key-structure.png" alt="إعداد بنية نموذج الإجابة وتحديد أنواع الأسئلة وأعدادها ودرجاتها" loading="lazy">
-            <div class="screen-caption"><strong>بنية نموذج الإجابة</strong><span>حدد أنواع الأسئلة وأعدادها ودرجاتها لتجهيز نموذج التصحيح.</span></div>
-          </button>
-          <button class="screen-card" type="button" data-src="assets/screenshots/correction-results.png" data-title="متابعة التصحيح وحصر الغياب" data-desc="تابع حالة الأوراق المصححة وقارنها بطلاب الصف مع تنبيه الغائبين.">
-            <img class="screen-image" src="assets/screenshots/correction-results.png" alt="متابعة أوراق الإجابة وحالات التصحيح ومراجعة الأخطاء" loading="lazy">
-            <div class="screen-caption"><strong>متابعة التصحيح ومراجعة النتائج</strong><span>تابع حالة الأوراق، واحصر الغائبين وراجع الأخطاء قبل الاعتماد.</span></div>
-          </button>
-          <button class="screen-card" type="button" data-src="assets/screenshots/review.png" data-title="مراجعة أوراق الإجابة" data-desc="راجع الإجابات المقروءة، واكتشف التظليل المزدوج أو الأخطاء وعدّلها بسهولة.">
-            <img class="screen-image" src="assets/screenshots/review.png" alt="مراجعة ورقة الإجابة ونتيجة التصحيح في إكزامكس" loading="lazy">
-            <div class="screen-caption"><strong>مراجعة أوراق الإجابة</strong><span>راجع الإجابات المقروءة، اكتشف التظليل المزدوج وعدّلها بسهولة.</span></div>
-          </button>
-          <button class="screen-card" type="button" data-src="assets/screenshots/reports.png" data-title="تقارير الاختبارات والنتائج" data-desc="كشوف درجات لكامل الصف مع رصد الغائب (0)، وإحصائيات وتصدير Excel وPDF.">
-            <img class="screen-image" src="assets/screenshots/reports.png" alt="تقارير الاختبارات وإحصائيات النتائج مع خيارات تصدير Excel وPDF" loading="lazy">
-            <div class="screen-caption"><strong>تقارير الاختبارات والنتائج</strong><span>كشف شامل لكامل الصف، رصد الغائب (٠)، وتصدير Excel و PDF.</span></div>
-          </button>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="الخطوات">
-      <div class="container workflow">
-        <div class="workflow-copy">
-          <div class="section-heading">
-            <span class="kicker">توزيع يناسب طريقتك</span>
-            <h2>تحكم كامل في تسكين الطلاب</h2>
-            <p>اختر أسلوب التوزيع الذي يناسب لجانك، ثم تحقّق من اكتمال التسكين قبل الطباعة.</p>
+      <section class="cta" id="الدعم">
+        <div class="container cta-box">
+          <div>
+            <h2>جاهز لاختبارات أكثر تنظيمًا؟</h2>
+            <p>
+              تواصل مع فريق إكزامكس، وسنساعدك على البدء والإجابة عن استفساراتك
+              وتفعيل مدرستك.
+            </p>
           </div>
-          <div class="steps">
-            <div class="step"><span class="step-no">١</span><div><strong>حسب فصولهم — في أماكنهم</strong><p>حافظ على جلوس الطلاب في فصولهم الحالية مع ترقيم جلوس منظم.</p></div></div>
-            <div class="step"><span class="step-no">٢</span><div><strong>توزيع تسلسلي حسب الصف والشعبة</strong><p>رتّب الطلاب بالتتابع وفق صفوفهم وشعبهم على اللجان المتاحة.</p></div></div>
-            <div class="step"><span class="step-no">٣</span><div><strong>توزيع متوازن بين الصفوف</strong><p>وزّع طلاب الصفوف المختلفة بالتوازن التام على اللجان لمنع التكدس.</p></div></div>
-            <div class="step"><span class="step-no">٤</span><div><strong>تخصيص يدوي أو حسب الأعمدة</strong><p>حدد عدد طلاب كل صف في اللجنة، أو اختر عدد الأعمدة وصفّين أو أكثر في العمود.</p></div></div>
+          <a
+            class="button"
+            href="https://wa.me/966542158808?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%D8%8C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D8%A8%D8%A7%D9%84%D8%A7%D8%B3%D8%AA%D9%81%D8%B3%D8%A7%D8%B1%20%D8%B9%D9%86%20%D8%A5%D9%83%D8%B2%D8%A7%D9%85%D9%83%D8%B3"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              width="18"
+              height="18"
+            >
+              <path
+                d="M20.5 11.7a8.6 8.6 0 0 1-12.7 7.6L3 20.5l1.2-4.6a8.6 8.6 0 1 1 16.3-4.2Z"
+              />
+              <path
+                d="M8.7 8.1c.2-.5.4-.5.7-.5h.5c.2 0 .4.1.5.4l.7 1.7c.1.2 0 .4-.1.6l-.5.6c-.2.2-.2.4-.1.6.4.8 1.1 1.5 1.9 1.9.2.1.4.1.6-.1l.7-.8c.2-.2.4-.2.6-.1l1.6.8c.2.1.3.3.3.5 0 .3-.2 1.2-.8 1.5-.6.4-1.3.5-2.2.2-1-.3-2.2-.8-3.4-2-1.1-1.1-1.8-2.4-2-3.3-.2-1 .1-1.7.5-2Z"
+              />
+            </svg>
+            راسلنا على واتساب · +966 54 215 8808
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="container footer-inner">
+        <a class="footer-brand" href="#الرئيسية"
+          ><img src="icons/app_icon.png" alt="" /> إكزامكس Examix</a
+        >
+        <span>منصة متكاملة لإدارة الاختبارات المدرسية</span>
+        <span
+          >تطوير: عبدالرزاق المعلوي · رقم وثيقة العمل الحر: FL-175369540</span
+        >
+        <div class="footer-links">
+          <a href="#المزايا">المزايا</a
+          ><a href="#الأسئلة-الشائعة">الأسئلة الشائعة</a
+          ><a
+            href="https://wa.me/966542158808"
+            target="_blank"
+            rel="noopener noreferrer"
+            >الدعم الفني</a
+          >
+        </div>
+      </div>
+    </footer>
+
+    <!-- عارض تكبير اللقطات -->
+    <div
+      class="lightbox"
+      id="lightbox"
+      role="dialog"
+      aria-modal="true"
+      aria-label="معاينة الصورة"
+    >
+      <div class="lightbox-box">
+        <img class="lightbox-img" id="lb-img" src="" alt="" />
+        <div class="lightbox-bar">
+          <div class="lightbox-info">
+            <strong id="lb-title"></strong>
+            <span id="lb-desc"></span>
           </div>
-        </div>
-        <div class="workflow-panel" aria-label="معاينة لمؤشر اكتمال توزيع الصفوف">
-          <div class="panel-top"><span>ملخص توزيع اللجان والتحقق</span><span class="live">● التحقق مكتمل ١٠٠٪</span></div>
-          <div class="class-bars">
-            <div class="class-row"><span>الصف الأول</span><div class="bar"><i style="width: 100%"></i></div><b>١٠٠٪</b></div>
-            <div class="class-row"><span>الصف الثاني</span><div class="bar"><i style="width: 100%"></i></div><b>١٠٠٪</b></div>
-            <div class="class-row"><span>الصف الثالث</span><div class="bar"><i style="width: 100%"></i></div><b>١٠٠٪</b></div>
-            <div class="class-row"><span>اكتمال التصحيح</span><div class="bar"><i style="width: 94%"></i></div><b>٩٤٪</b></div>
+          <div class="lightbox-actions">
+            <button
+              class="lb-btn"
+              id="lb-prev"
+              type="button"
+              aria-label="السابق"
+            >
+              →
+            </button>
+            <button
+              class="lb-btn"
+              id="lb-next"
+              type="button"
+              aria-label="التالي"
+            >
+              ←
+            </button>
+            <button
+              class="lb-btn"
+              id="lb-close"
+              type="button"
+              aria-label="إغلاق"
+            >
+              ✕
+            </button>
           </div>
-          <div class="panel-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12 4 4L19 6"/></svg> تمت مراجعة التوزيع والتصحيح — جميع الطلاب مسكّنون وتم حصر الغياب تلقائياً</div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section soft">
-      <div class="container">
-        <div class="section-heading">
-          <span class="kicker">وقت أقل. دقة أعلى.</span>
-          <h2>كل خطوة أسهل مع إكزامكس</h2>
-          <p>صُممت المزايا لتساعد فريق المدرسة على إنجاز موسم الاختبارات بسلاسة وموثوقية كاملة.</p>
-        </div>
-        <div class="benefit-row">
-          <div class="benefit"><span class="benefit-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><h3>إنجاز أسرع</h3><p>اختصر ساعات العمل اليدوي في التوزيع والطباعة ورصد الدرجات.</p></div>
-          <div class="benefit"><span class="benefit-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3 4 6v5c0 5 3.4 8.5 8 10 4.6-1.5 8-5 8-10V6l-8-3Z"/><path d="m9 12 2 2 4-4"/></svg></span><h3>دقة واطمئنان</h3><p>تحقق من التسكين، راجع أخطاء التظليل، وتأكد من عدم سقوط أي طالب غائب.</p></div>
-          <div class="benefit"><span class="benefit-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16v16H4z"/><path d="M8 8h8M8 12h8M8 16h4"/></svg></span><h3>تنظيم متكامل</h3><p>المراحل، الطلاب، النماذج، الصور، والدرجات في أرشيف واحد منظم.</p></div>
-          <div class="benefit"><span class="benefit-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 12a8 8 0 0 1 16 0v5a2 2 0 0 1-2 2h-2v-6h4M4 13h4v6H6a2 2 0 0 1-2-2v-4Z"/></svg></span><h3>دعم قريب منك</h3><p>فريق إكزامكس جاهز لمساعدتك وتدريب فريق المدرسة عبر واتساب.</p></div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="الأسئلة-الشائعة">
-      <div class="container">
-        <div class="section-heading">
-          <span class="kicker">إجابات سريعة</span>
-          <h2>الأسئلة الشائعة</h2>
-          <p>أكثر الاستفسارات شيوعاً حول التشغيل، التصحيح الآلي، نظام نور، والمزامنة.</p>
-        </div>
-        <div class="faq-list">
-          <details class="faq-item" open>
-            <summary class="faq-q">هل يحتاج التصحيح الآلي جهاز OMR خاصاً أم تكفي الطابعة والماسح العادي؟</summary>
-            <div class="faq-a">لا يحتاج أي أجهزة OMR باهظة الثمن؛ يمكنك طباعة نماذج الإجابة على أي طابعة مكتبية عادية، ثم مسح الأوراق بأي ماسح ضوئي (Scanner) أو استيرادها كملف PDF متعدد الصفحات أو صور مباشرة داخل إكزامكس.</div>
-          </details>
-          <details class="faq-item">
-            <summary class="faq-q">ما هي الإعدادات الموصى بها للماسح الضوئي (صور JPG أو ملفات PDF)؟</summary>
-            <div class="faq-a">
-              <strong>الإعدادات الموصى بها عند المسح بصيغة صور (JPG / JPEG):</strong>
-              <ul>
-                <li><strong>الصيغة:</strong> JPG / JPEG</li>
-                <li><strong>الدقة:</strong> 200 dpi</li>
-                <li><strong>اللون:</strong> رمادي / تدرج رمادي (Grayscale)</li>
-                <li><strong>حجم الورق:</strong> A4 أو كشف تلقائي، مع وضع ورقة نموذج الإجابة (MASTER_KEY) أول ورقة في المجلد أو الترتيب.</li>
-              </ul>
-              <strong>الإعدادات الموصى بها عند الحفظ بصيغة PDF:</strong>
-              <ul>
-                <li><strong>الصيغة:</strong> PDF (متعدد الصفحات — ملف واحد يضم جميع الأوراق).</li>
-                <li><strong>الدقة:</strong> 150 إلى 200 dpi</li>
-                <li><strong>اللون:</strong> رمادي / تدرج رمادي (Grayscale)</li>
-                <li><strong>حجم الورق:</strong> A4 أو كشف تلقائي</li>
-                <li><strong>المصدر:</strong> وحدة التغذية التلقائية بالمستندات – على وجه واحد</li>
-                <li><strong>الترتيب:</strong> وضع ورقة نموذج الإجابة (MASTER_KEY) كأول صفحة في الملف، وفي حال المسح على الوجهين يُنصح بتفعيل خيار تخطي الصفحات البيضاء داخل شاشة التصحيح.</li>
-                <li><strong>الضغط وOCR (إن وُجدت في برنامج الماسح):</strong> استخدام ضغط عادي/متوازن وتجنب خيار «الضغط الفائق / High Compression»، وكذلك إيقاف OCR (التعرف الضوئي على النصوص) لتسريع عملية المسح من الماسح.</li>
-              </ul>
-            </div>
-          </details>
-          <details class="faq-item">
-            <summary class="faq-q">هل يعمل البرنامج بدون اتصال بالإنترنت؟</summary>
-            <div class="faq-a">نعم، يعمل البرنامج محلياً بالكامل لإدارة الطلاب، توزيع اللجان، طباعة الكشوف ونماذج OMR، والتصحيح الآلي وإصدار التقارير بسرعة عالية دون اشتراط اتصال دائم. يلزم الإنترنت فقط عند التفعيل الأول أو عند استخدام المزامنة السحابية بين الأجهزة.</div>
-          </details>
-          <details class="faq-item">
-            <summary class="faq-q">كيف أستورد بيانات الطلاب من نظام نور وكيف أنقل الدرجات إليه؟</summary>
-            <div class="faq-a">من نظام نور اختر «تقارير ← الطلاب ← كشف الطلاب» وصدّره بصيغة Excel ثم استورده مباشرة في المرحلة الدراسية داخل إكزامكس. وبعد انتهاء التصحيح يمكنك تصدير الدرجات إلى Excel أو PDF أو نسخها ولصقها مباشرة في نظام نور عبر إضافة إكزامكس.</div>
-          </details>
-          <details class="faq-item">
-            <summary class="faq-q">ماذا يحدث عند التظليل المزدوج أو ترك سؤال فارغ أو غياب الطالب؟</summary>
-            <div class="faq-a">يكتشف النظام التظليل المزدوج (في الاختيار من متعدد أو الصح والخطأ أو المزاوجة) وكذلك الأسئلة الفارغة ويعرضها في شاشة مراجعة واضحة لتعديلها بنقرة واحدة. كما يقارن عدد الأوراق المصححة بعدد طلاب الصف/الشعبة لعرض تنبيه بالغائبين، ويرصدهم تلقائياً في كشف الدرجات بـ «غائب (٠)».</div>
-          </details>
-          <details class="faq-item">
-            <summary class="faq-q">هل يمكن تحديد شعبة معينة عند إنشاء الاختبار أو تعديله بعد الحفظ؟</summary>
-            <div class="faq-a">نعم؛ عند إنشاء الاختبار يتم اختيار جميع شعب الصف افتراضياً، مع إمكانية تحديد شعبة معينة أو أكثر بحيث تقتصر الطباعة ومقارنة الغياب والكشوف على طلابها فقط. كما يمكنك تعديل بيانات الاختبار وتوزيع أسئلته بالكامل طالما لم يبدأ تصحيح أوراق الطلاب بعد.</div>
-          </details>
-          <details class="faq-item">
-            <summary class="faq-q">هل يمكن التعاون على أكثر من جهاز في نفس المدرسة؟</summary>
-            <div class="faq-a">نعم، يوفّر إكزامكس ميزة المزامنة السحابية الذكية للتعاون بين أعضاء لجنة الاختبارات (جهاز للتوزيع والطباعة وآخر للتصحيح) مع كشف التعارضات، بالإضافة إلى إمكانية تصدير واستيراد أرشيف <code>.examix</code> الكامل الذي يحفظ قاعدة البيانات وصور أوراق الإجابة معاً.</div>
-          </details>
-        </div>
-      </div>
-    </section>
-
-    <section class="cta" id="الدعم">
-      <div class="container cta-box">
-        <div>
-          <h2>جاهز لاختبارات أكثر تنظيمًا؟</h2>
-          <p>تواصل مع فريق إكزامكس، وسنساعدك على البدء والإجابة عن استفساراتك وتفعيل مدرستك.</p>
-        </div>
-        <a class="button" href="https://wa.me/966542158808?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%D8%8C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D8%A8%D8%A7%D9%84%D8%A7%D8%B3%D8%AA%D9%81%D8%B3%D8%A7%D8%B1%20%D8%B9%D9%86%20%D8%A5%D9%83%D8%B2%D8%A7%D9%85%D9%83%D8%B3" target="_blank" rel="noopener noreferrer">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="18" height="18"><path d="M20.5 11.7a8.6 8.6 0 0 1-12.7 7.6L3 20.5l1.2-4.6a8.6 8.6 0 1 1 16.3-4.2Z"/><path d="M8.7 8.1c.2-.5.4-.5.7-.5h.5c.2 0 .4.1.5.4l.7 1.7c.1.2 0 .4-.1.6l-.5.6c-.2.2-.2.4-.1.6.4.8 1.1 1.5 1.9 1.9.2.1.4.1.6-.1l.7-.8c.2-.2.4-.2.6-.1l1.6.8c.2.1.3.3.3.5 0 .3-.2 1.2-.8 1.5-.6.4-1.3.5-2.2.2-1-.3-2.2-.8-3.4-2-1.1-1.1-1.8-2.4-2-3.3-.2-1 .1-1.7.5-2Z"/></svg>
-          راسلنا على واتساب · +966 54 215 8808
-        </a>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <div class="container footer-inner">
-      <a class="footer-brand" href="#الرئيسية"><img src="icons/app_icon.png" alt=""> إكزامكس Examix</a>
-      <span>منصة متكاملة لإدارة الاختبارات المدرسية</span>
-      <span>تطوير: عبدالرزاق المعلوي · رقم وثيقة العمل الحر: FL-175369540</span>
-      <div class="footer-links"><a href="#المزايا">المزايا</a><a href="#الأسئلة-الشائعة">الأسئلة الشائعة</a><a href="https://wa.me/966542158808" target="_blank" rel="noopener noreferrer">الدعم الفني</a></div>
-    </div>
-  </footer>
-
-  <!-- عارض تكبير اللقطات -->
-  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="معاينة الصورة">
-    <div class="lightbox-box">
-      <img class="lightbox-img" id="lb-img" src="" alt="">
-      <div class="lightbox-bar">
-        <div class="lightbox-info">
-          <strong id="lb-title"></strong>
-          <span id="lb-desc"></span>
-        </div>
-        <div class="lightbox-actions">
-          <button class="lb-btn" id="lb-prev" type="button" aria-label="السابق">→</button>
-          <button class="lb-btn" id="lb-next" type="button" aria-label="التالي">←</button>
-          <button class="lb-btn" id="lb-close" type="button" aria-label="إغلاق">✕</button>
         </div>
       </div>
     </div>
-  </div>
 
-  <script>
-    const menuButton = document.querySelector(".menu-toggle");
-    const navLinks = document.querySelector(".nav-links");
+    <script>
+      const menuButton = document.querySelector(".menu-toggle");
+      const navLinks = document.querySelector(".nav-links");
 
-    menuButton.addEventListener("click", () => {
-      const isOpen = navLinks.classList.toggle("open");
-      menuButton.setAttribute("aria-expanded", String(isOpen));
-    });
+      menuButton.addEventListener("click", () => {
+        const isOpen = navLinks.classList.toggle("open");
+        menuButton.setAttribute("aria-expanded", String(isOpen));
+      });
 
-    navLinks.addEventListener("click", (event) => {
-      if (event.target.closest("a")) {
-        navLinks.classList.remove("open");
-        menuButton.setAttribute("aria-expanded", "false");
-      }
-    });
+      navLinks.addEventListener("click", (event) => {
+        if (event.target.closest("a")) {
+          navLinks.classList.remove("open");
+          menuButton.setAttribute("aria-expanded", "false");
+        }
+      });
 
-    // تصفية بطاقات المزايا
-    const filterButtons = document.querySelectorAll(".filter-btn");
-    const featureCards = document.querySelectorAll(".feature-card");
-    filterButtons.forEach((btn) => {
-      btn.addEventListener("click", () => {
-        filterButtons.forEach((b) => b.classList.remove("active"));
-        btn.classList.add("active");
-        const filter = btn.dataset.filter;
-        featureCards.forEach((card) => {
-          const match = filter === "all" || card.dataset.category === filter;
-          card.classList.toggle("hidden", !match);
+      const copyTrialCodeButton = document.getElementById("copy-trial-code");
+      copyTrialCodeButton.addEventListener("click", async () => {
+        const code = document.getElementById("trial-code").textContent;
+        try {
+          await navigator.clipboard.writeText(code);
+          copyTrialCodeButton.textContent = "تم النسخ";
+          setTimeout(() => {
+            copyTrialCodeButton.textContent = "نسخ الكود";
+          }, 1600);
+        } catch {
+          const range = document.createRange();
+          range.selectNodeContents(document.getElementById("trial-code"));
+          window.getSelection().removeAllRanges();
+          window.getSelection().addRange(range);
+        }
+      });
+
+      // تصفية بطاقات المزايا
+      const filterButtons = document.querySelectorAll(".filter-btn");
+      const featureCards = document.querySelectorAll(".feature-card");
+      filterButtons.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          filterButtons.forEach((b) => b.classList.remove("active"));
+          btn.classList.add("active");
+          const filter = btn.dataset.filter;
+          featureCards.forEach((card) => {
+            const match = filter === "all" || card.dataset.category === filter;
+            card.classList.toggle("hidden", !match);
+          });
         });
       });
-    });
 
-    // عارض تكبير لقطات التطبيق
-    const screenCards = Array.from(document.querySelectorAll(".screen-card"));
-    const lightbox = document.getElementById("lightbox");
-    const lbImg = document.getElementById("lb-img");
-    const lbTitle = document.getElementById("lb-title");
-    const lbDesc = document.getElementById("lb-desc");
-    let currentScreenIdx = 0;
+      // عارض تكبير لقطات التطبيق
+      const screenCards = Array.from(document.querySelectorAll(".screen-card"));
+      const lightbox = document.getElementById("lightbox");
+      const lbImg = document.getElementById("lb-img");
+      const lbTitle = document.getElementById("lb-title");
+      const lbDesc = document.getElementById("lb-desc");
+      let currentScreenIdx = 0;
 
-    function openLightbox(index) {
-      currentScreenIdx = (index + screenCards.length) % screenCards.length;
-      const card = screenCards[currentScreenIdx];
-      lbImg.src = card.dataset.src;
-      lbImg.alt = card.dataset.title;
-      lbTitle.textContent = card.dataset.title;
-      lbDesc.textContent = card.dataset.desc;
-      lightbox.classList.add("open");
-      document.body.style.overflow = "hidden";
-    }
+      function openLightbox(index) {
+        currentScreenIdx = (index + screenCards.length) % screenCards.length;
+        const card = screenCards[currentScreenIdx];
+        lbImg.src = card.dataset.src;
+        lbImg.alt = card.dataset.title;
+        lbTitle.textContent = card.dataset.title;
+        lbDesc.textContent = card.dataset.desc;
+        lightbox.classList.add("open");
+        document.body.style.overflow = "hidden";
+      }
 
-    function closeLightbox() {
-      lightbox.classList.remove("open");
-      document.body.style.overflow = "";
-    }
+      function closeLightbox() {
+        lightbox.classList.remove("open");
+        document.body.style.overflow = "";
+      }
 
-    screenCards.forEach((card, idx) => {
-      card.addEventListener("click", () => openLightbox(idx));
-    });
-    document.getElementById("lb-prev").addEventListener("click", () => openLightbox(currentScreenIdx - 1));
-    document.getElementById("lb-next").addEventListener("click", () => openLightbox(currentScreenIdx + 1));
-    document.getElementById("lb-close").addEventListener("click", closeLightbox);
-    lightbox.addEventListener("click", (e) => {
-      if (e.target === lightbox) closeLightbox();
-    });
-    document.addEventListener("keydown", (e) => {
-      if (!lightbox.classList.contains("open")) return;
-      if (e.key === "Escape") closeLightbox();
-      if (e.key === "ArrowRight") openLightbox(currentScreenIdx - 1);
-      if (e.key === "ArrowLeft") openLightbox(currentScreenIdx + 1);
-    });
-  </script>
-</body>
+      screenCards.forEach((card, idx) => {
+        card.addEventListener("click", () => openLightbox(idx));
+      });
+      document
+        .getElementById("lb-prev")
+        .addEventListener("click", () => openLightbox(currentScreenIdx - 1));
+      document
+        .getElementById("lb-next")
+        .addEventListener("click", () => openLightbox(currentScreenIdx + 1));
+      document
+        .getElementById("lb-close")
+        .addEventListener("click", closeLightbox);
+      lightbox.addEventListener("click", (e) => {
+        if (e.target === lightbox) closeLightbox();
+      });
+      document.addEventListener("keydown", (e) => {
+        if (!lightbox.classList.contains("open")) return;
+        if (e.key === "Escape") closeLightbox();
+        if (e.key === "ArrowRight") openLightbox(currentScreenIdx - 1);
+        if (e.key === "ArrowLeft") openLightbox(currentScreenIdx + 1);
+      });
+    </script>
+  </body>
 </html>

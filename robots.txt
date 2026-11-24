@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://hw123me.github.io/examix-support/sitemap.xml

@@ -1361,7 +1361,238 @@
           max-width: 760px;
         }
       }
+      /* دليل الاستخدام التفاعلي بالصور المتحركة */
+      .guide-showcase {
+        display: grid;
+        grid-template-columns: 0.92fr 1.48fr;
+        gap: 24px;
+        align-items: start;
+      }
+      .guide-steps {
+        display: grid;
+        gap: 10px;
+      }
+      .guide-step-btn {
+        display: flex;
+        align-items: flex-start;
+        gap: 14px;
+        width: 100%;
+        padding: 15px 16px;
+        border: 1.5px solid var(--line);
+        border-radius: 16px;
+        background: #fff;
+        color: var(--ink);
+        font: inherit;
+        text-align: start;
+        cursor: pointer;
+        transition:
+          border-color 0.2s,
+          box-shadow 0.2s,
+          transform 0.2s,
+          background-color 0.2s;
+      }
+      .guide-step-btn:hover {
+        border-color: rgba(32, 201, 232, 0.55);
+        transform: translateY(-2px);
+        box-shadow: 0 10px 24px rgba(16, 22, 93, 0.06);
+      }
+      .guide-step-btn.active {
+        border-color: var(--blue);
+        background: linear-gradient(135deg, #f3fbff 0%, #f1fdf9 100%);
+        box-shadow:
+          0 0 0 3px rgba(32, 201, 232, 0.14),
+          0 14px 30px rgba(16, 22, 93, 0.08);
+      }
+      .guide-step-num {
+        flex: 0 0 34px;
+        display: grid;
+        place-items: center;
+        width: 34px;
+        height: 34px;
+        border-radius: 10px;
+        background: var(--soft);
+        color: var(--navy);
+        font-size: 13px;
+        font-weight: 800;
+        transition:
+          background-color 0.2s,
+          color 0.2s;
+      }
+      .guide-step-btn.active .guide-step-num {
+        background: linear-gradient(135deg, var(--navy) 0%, #1c3a8a 100%);
+        color: #fff;
+      }
+      .guide-step-copy strong {
+        display: block;
+        margin-bottom: 3px;
+        color: var(--navy);
+        font-size: 14.5px;
+      }
+      .guide-step-copy span {
+        display: block;
+        color: var(--muted);
+        font-size: 12.2px;
+        line-height: 1.65;
+      }
+      .guide-stage {
+        position: sticky;
+        top: 94px;
+        overflow: hidden;
+        border: 1.5px solid #cbd6ee;
+        border-radius: 22px;
+        background: #0d133d;
+        box-shadow: var(--shadow);
+      }
+      .guide-stage-bar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 13px 18px;
+        background: linear-gradient(90deg, #10165d 0%, #162375 100%);
+        color: #fff;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      .guide-stage-title {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        min-width: 0;
+      }
+      .guide-badge {
+        flex: 0 0 auto;
+        padding: 4px 10px;
+        border-radius: 999px;
+        background: rgba(8, 201, 149, 0.18);
+        border: 1px solid rgba(8, 201, 149, 0.45);
+        color: #7df5d0;
+        font-size: 11px;
+        font-weight: 700;
+      }
+      .guide-stage-title strong {
+        font-size: 14px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .guide-stage-actions {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex: 0 0 auto;
+      }
+      .guide-icon-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        padding: 6px 11px;
+        border: 1px solid rgba(255, 255, 255, 0.22);
+        border-radius: 9px;
+        background: rgba(255, 255, 255, 0.08);
+        color: #fff;
+        font: inherit;
+        font-size: 11.5px;
+        font-weight: 600;
+        cursor: pointer;
+        transition:
+          background-color 0.2s,
+          border-color 0.2s;
+      }
+      .guide-icon-btn:hover {
+        background: rgba(255, 255, 255, 0.18);
+        border-color: rgba(32, 201, 232, 0.7);
+      }
+      .guide-media-wrap {
+        position: relative;
+        aspect-ratio: 16 / 9;
+        background: #f5f7fc;
+        display: grid;
+        place-items: center;
+        overflow: hidden;
+      }
+      .guide-media {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        display: block;
+        transition: opacity 0.22s ease;
+      }
+      .guide-media.loading {
+        opacity: 0.35;
+      }
+      .guide-loader {
+        position: absolute;
+        inset: 0;
+        display: none;
+        place-items: center;
+        background: rgba(13, 19, 61, 0.35);
+        color: #fff;
+        font-size: 13px;
+        font-weight: 700;
+        backdrop-filter: blur(2px);
+      }
+      .guide-loader.active {
+        display: grid;
+      }
+      .guide-stage-footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 13px 18px;
+        background: #fff;
+        border-top: 1px solid var(--line);
+      }
+      .guide-stage-desc {
+        margin: 0;
+        color: var(--muted);
+        font-size: 12.5px;
+        line-height: 1.6;
+      }
+      .guide-nav-btns {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex: 0 0 auto;
+      }
+      .guide-nav-btn {
+        padding: 7px 13px;
+        border: 1px solid var(--line);
+        border-radius: 9px;
+        background: var(--soft);
+        color: var(--navy);
+        font: inherit;
+        font-size: 12px;
+        font-weight: 700;
+        cursor: pointer;
+        transition:
+          background-color 0.2s,
+          border-color 0.2s;
+      }
+      .guide-nav-btn:hover {
+        background: #eaf4ff;
+        border-color: var(--blue);
+      }
+      @media (max-width: 960px) {
+        .guide-showcase {
+          grid-template-columns: 1fr;
+          gap: 16px;
+        }
+        .guide-stage {
+          position: static;
+        }
+      }
       @media (max-width: 700px) {
+        .guide-stage-bar {
+          flex-wrap: wrap;
+        }
+        .guide-stage-footer {
+          flex-direction: column;
+          align-items: stretch;
+        }
+        .guide-nav-btns {
+          justify-content: space-between;
+        }
         .container {
           width: min(100% - 36px, 540px);
         }
@@ -1590,6 +1821,7 @@
         <div class="nav-links">
           <a href="#المزايا">المزايا</a>
           <a href="#من-داخل-إكزامكس">من داخل التطبيق</a>
+          <a href="#دليل-الاستخدام">طريقة الاستخدام</a>
           <a href="#الخطوات">آلية التوزيع</a>
           <a href="#الأسئلة-الشائعة">الأسئلة الشائعة</a>
           <a href="#الاشتراكات">الباقات</a>
@@ -2269,6 +2501,138 @@
                 >
               </div>
             </button>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="دليل-الاستخدام">
+        <div class="container">
+          <div class="section-heading">
+            <span class="kicker">شرح عملي بالصور المتحركة</span>
+            <h2>طريقة استخدام إكزامكس خطوة بخطوة</h2>
+            <p>
+              اختر أي خطوة من رحلة الاختبارات لمشاهدة شرحها المتحرك مباشرة داخل
+              التطبيق، من إنشاء المرحلة وحتى تصدير النتائج.
+            </p>
+          </div>
+          <div class="guide-showcase">
+            <div class="guide-steps" role="tablist" aria-label="خطوات استخدام التطبيق">
+              <button
+                class="guide-step-btn active"
+                type="button"
+                role="tab"
+                aria-selected="true"
+                data-gif="assets/gif/إنشاء مرحلة.gif"
+                data-step="١"
+                data-title="إنشاء مرحلة دراسية"
+                data-desc="أنشئ المرحلة الدراسية المستقلة واضبط اسم المدرسة خلال ثوانٍ لتبدأ العمل بقاعدة بيانات منظمة."
+              >
+                <span class="guide-step-num">١</span>
+                <span class="guide-step-copy">
+                  <strong>إنشاء مرحلة دراسية</strong>
+                  <span>تهيئة المرحلة وإعداد اسم المدرسة ببيانات معزولة.</span>
+                </span>
+              </button>
+              <button
+                class="guide-step-btn"
+                type="button"
+                role="tab"
+                aria-selected="false"
+                data-gif="assets/gif/استيراد الطلاب.gif"
+                data-step="٢"
+                data-title="استيراد الطلاب من نظام نور"
+                data-desc="استورد كشف الطلاب من ملف Excel المصدّر من نظام نور مع توزيعهم التلقائي على الصفوف والشعب."
+              >
+                <span class="guide-step-num">٢</span>
+                <span class="guide-step-copy">
+                  <strong>استيراد الطلاب</strong>
+                  <span>رفع كشف نظام نور (Excel) وقراءة الصفوف والشعب تلقائياً.</span>
+                </span>
+              </button>
+              <button
+                class="guide-step-btn"
+                type="button"
+                role="tab"
+                aria-selected="false"
+                data-gif="assets/gif/ادارة اللجان وتوزيع الطلاب.gif"
+                data-step="٣"
+                data-title="إدارة اللجان وتوزيع الطلاب"
+                data-desc="أنشئ لجان الاختبارات، وزّع الطلاب بالطريقة المناسبة، واطبع كشوف المناداة والملصقات ولافتات الأبواب."
+              >
+                <span class="guide-step-num">٣</span>
+                <span class="guide-step-copy">
+                  <strong>إدارة اللجان وتوزيع الطلاب</strong>
+                  <span>تسكين ذكي على اللجان وطباعة الكشوف والملصقات.</span>
+                </span>
+              </button>
+              <button
+                class="guide-step-btn"
+                type="button"
+                role="tab"
+                aria-selected="false"
+                data-gif="assets/gif/الاختبارات والتصحيح.gif"
+                data-step="٤"
+                data-title="الاختبارات والتصحيح الآلي"
+                data-desc="أنشئ الاختبار ومفتاح الإجابة، اطبع أوراق OMR، ثم امسح أوراق الطلاب للتصحيح الفوري ومراجعة الحالات."
+              >
+                <span class="guide-step-num">٤</span>
+                <span class="guide-step-copy">
+                  <strong>الاختبارات والتصحيح</strong>
+                  <span>إنشاء الاختبار وتصحيح أوراق OMR وحصر الغياب.</span>
+                </span>
+              </button>
+              <button
+                class="guide-step-btn"
+                type="button"
+                role="tab"
+                aria-selected="false"
+                data-gif="assets/gif/التقارير وتحليل النتائج.gif"
+                data-step="٥"
+                data-title="التقارير وتحليل النتائج"
+                data-desc="استعرض الإحصائيات وتحليل الأسئلة، وصدّر الكشوف إلى Excel أو PDF أو انقل الدرجات مباشرة إلى نظام نور."
+              >
+                <span class="guide-step-num">٥</span>
+                <span class="guide-step-copy">
+                  <strong>التقارير وتحليل النتائج</strong>
+                  <span>إحصائيات دقيقة وتصدير Excel وPDF ونقل لنور.</span>
+                </span>
+              </button>
+            </div>
+
+            <div class="guide-stage" aria-live="polite">
+              <div class="guide-stage-bar">
+                <div class="guide-stage-title">
+                  <span class="guide-badge" id="guide-badge">الخطوة ١ من ٥</span>
+                  <strong id="guide-title">إنشاء مرحلة دراسية</strong>
+                </div>
+                <div class="guide-stage-actions">
+                  <button class="guide-icon-btn" id="guide-replay" type="button" title="إعادة تشغيل العرض">
+                    ↻ إعادة
+                  </button>
+                  <button class="guide-icon-btn" id="guide-zoom" type="button" title="تكبير العرض">
+                    ⤢ تكبير
+                  </button>
+                </div>
+              </div>
+              <div class="guide-media-wrap">
+                <img
+                  class="guide-media"
+                  id="guide-img"
+                  src="assets/gif/إنشاء مرحلة.gif"
+                  alt="شرح متحرك: إنشاء مرحلة دراسية في إكزامكس"
+                />
+                <div class="guide-loader" id="guide-loader">جاري تحميل العرض المتحرك...</div>
+              </div>
+              <div class="guide-stage-footer">
+                <p class="guide-stage-desc" id="guide-desc">
+                  أنشئ المرحلة الدراسية المستقلة واضبط اسم المدرسة خلال ثوانٍ لتبدأ العمل بقاعدة بيانات منظمة.
+                </p>
+                <div class="guide-nav-btns">
+                  <button class="guide-nav-btn" id="guide-prev" type="button">→ السابق</button>
+                  <button class="guide-nav-btn" id="guide-next" type="button">التالي ←</button>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -2964,6 +3328,69 @@
         if (e.key === "Escape") closeLightbox();
         if (e.key === "ArrowRight") openLightbox(currentScreenIdx - 1);
         if (e.key === "ArrowLeft") openLightbox(currentScreenIdx + 1);
+      });
+
+      // دليل الاستخدام التفاعلي بالصور المتحركة (GIF)
+      const guideButtons = Array.from(document.querySelectorAll(".guide-step-btn"));
+      const guideImg = document.getElementById("guide-img");
+      const guideLoader = document.getElementById("guide-loader");
+      const guideBadge = document.getElementById("guide-badge");
+      const guideTitle = document.getElementById("guide-title");
+      const guideDesc = document.getElementById("guide-desc");
+      let activeGuideIdx = 0;
+
+      function setGuideStep(index, forceReload = false) {
+        activeGuideIdx = (index + guideButtons.length) % guideButtons.length;
+        const btn = guideButtons[activeGuideIdx];
+        guideButtons.forEach((b, i) => {
+          const isActive = i === activeGuideIdx;
+          b.classList.toggle("active", isActive);
+          b.setAttribute("aria-selected", String(isActive));
+        });
+
+        guideBadge.textContent = `الخطوة ${btn.dataset.step} من ${guideButtons.length}`;
+        guideTitle.textContent = btn.dataset.title;
+        guideDesc.textContent = btn.dataset.desc;
+
+        const gifSrc = btn.dataset.gif;
+        const nextSrc = forceReload ? `${gifSrc}?t=${Date.now()}` : gifSrc;
+        guideImg.classList.add("loading");
+        guideLoader.classList.add("active");
+        guideImg.alt = `شرح متحرك: ${btn.dataset.title} في إكزامكس`;
+        guideImg.src = nextSrc;
+      }
+
+      if (guideImg) {
+        guideImg.addEventListener("load", () => {
+          guideImg.classList.remove("loading");
+          guideLoader.classList.remove("active");
+        });
+        guideImg.addEventListener("error", () => {
+          guideImg.classList.remove("loading");
+          guideLoader.classList.remove("active");
+        });
+      }
+
+      guideButtons.forEach((btn, idx) => {
+        btn.addEventListener("click", () => setGuideStep(idx));
+      });
+      document
+        .getElementById("guide-prev")
+        ?.addEventListener("click", () => setGuideStep(activeGuideIdx - 1));
+      document
+        .getElementById("guide-next")
+        ?.addEventListener("click", () => setGuideStep(activeGuideIdx + 1));
+      document
+        .getElementById("guide-replay")
+        ?.addEventListener("click", () => setGuideStep(activeGuideIdx, true));
+      document.getElementById("guide-zoom")?.addEventListener("click", () => {
+        const btn = guideButtons[activeGuideIdx];
+        lbImg.src = btn.dataset.gif;
+        lbImg.alt = btn.dataset.title;
+        lbTitle.textContent = `${btn.dataset.step}. ${btn.dataset.title}`;
+        lbDesc.textContent = btn.dataset.desc;
+        lightbox.classList.add("open");
+        document.body.style.overflow = "hidden";
       });
     </script>
   </body>
